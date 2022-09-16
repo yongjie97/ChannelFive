@@ -1,4 +1,4 @@
-# ChannelFive
+# EasyUni by ChannelFive
 Lab Project for SC2005 Software Engineer Module
 
 ## Technologies & Tools Requirements
