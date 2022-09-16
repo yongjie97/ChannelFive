@@ -12,4 +12,4 @@ Lab Project for SC2005 Software Engineer Module
 Pre-university students seeking information to make a better judgements when choosing school and course.
 
 ## Solution
-Our website offers consolidated information from different universities, offers insight into IGP and starting salary. Includes a discussion platform for users to ask questions and interact with other users, as well as course reviews offered by the university.
+Our website offers consolidated information from different universities, offers insight into IGP and starting median salary. In addition, a discussion platform is available on the website for users to interact with other users, posting or answering enquiries. Users will also be able to the courses offered by each university.
