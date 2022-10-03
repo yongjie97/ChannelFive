@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.channelfive.easyuni.exceptions.UserAlreadyExistException;
-import com.channelfive.easyuni.services.AccountService;
+import com.channelfive.easyuni.services.RegisterService;
 import com.channelfive.easyuni.validations.RegisterForm;
 
 @Controller
 public class RegistrationController {
 
     @Autowired
-    private AccountService accountService;
+    private RegisterService registerService;
 
     @GetMapping("/register")
     public String register(final Model model){
@@ -35,7 +35,7 @@ public class RegistrationController {
             return ResponseEntity.ok("Invalid Form");
         }
         try {
-            accountService.register(registerForm);
+            registerService.register(registerForm);
         } catch (UserAlreadyExistException e) {
             bindingResult.rejectValue("email", "accountData.email","An account already exists for this email.");
             model.addAttribute("registrationForm", registerForm);

@@ -1,12 +1,14 @@
 package com.channelfive.easyuni.entities;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.channelfive.easyuni.constants.AccountRoleConstant;
@@ -17,7 +19,7 @@ public class Account {
     @Id
     private String id;
 
-    private AccountRoleConstant userType;
+    private Set<AccountRoleConstant> roles = new HashSet<>();
 
     @Email
     @NotBlank
@@ -31,7 +33,6 @@ public class Account {
     private LocalDateTime accountDate;
 
     public Account() {
-        userType = AccountRoleConstant.USER;
         accountDate = LocalDateTime.now();
     }
 
@@ -43,12 +44,12 @@ public class Account {
         this.id = id;
     }
 
-    public AccountRoleConstant getUserType() {
-        return userType;
+    public Set<AccountRoleConstant> getRoles() {
+        return roles;
     }
 
-    public void setUserType(AccountRoleConstant userType) {
-        this.userType = userType;
+    public void setRoles(Set<AccountRoleConstant> roles) {
+        this.roles = roles;
     }
 
     public String getEmail() {

@@ -1,17 +1,21 @@
 package com.channelfive.easyuni.services;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+import com.channelfive.easyuni.constants.AccountRoleConstant;
 import com.channelfive.easyuni.entities.Account;
 import com.channelfive.easyuni.exceptions.UserAlreadyExistException;
 import com.channelfive.easyuni.services.repositories.AccountRepository;
 import com.channelfive.easyuni.validations.RegisterForm;
 
-@Service("accountService")
-public class AccountService {
+@Service
+public class RegisterService {
     
     @Autowired
     private AccountRepository accountRepository;
@@ -26,16 +30,14 @@ public class AccountService {
         }
         Account accountEntity = new Account();
         BeanUtils.copyProperties(registerForm, accountEntity);
-        encodePassword(accountEntity, registerForm);
+        accountEntity.setPassword(passwordEncoder.encode(registerForm.getPassword()));
+        Set<AccountRoleConstant> roles = new HashSet<>();
+        roles.add(AccountRoleConstant.USER);
+        accountEntity.setRoles(roles);
         accountRepository.save(accountEntity);
     }
 
     public boolean checkIfUserExist(String email) {
-        return accountRepository.findByEmail(email) !=null ? true : false;
+        return accountRepository.existsByEmail(email) == true ? true : false;
     }
-
-    private void encodePassword(Account accountEntity, RegisterForm registerForm) {
-        accountEntity.setPassword(passwordEncoder.encode(registerForm.getPassword()));
-    }
-
 }
