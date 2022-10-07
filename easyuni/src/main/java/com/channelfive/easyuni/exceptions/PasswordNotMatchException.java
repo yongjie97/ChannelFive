@@ -6,11 +6,9 @@ public class PasswordNotMatchException extends Exception {
         super();
     }
 
-
     public PasswordNotMatchException(String message) {
         super(message);
     }
-
 
     public PasswordNotMatchException(String message, Throwable cause) {
         super(message, cause);

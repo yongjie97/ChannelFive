@@ -16,7 +16,6 @@ import com.channelfive.easyuni.entities.Account;
 import com.channelfive.easyuni.exceptions.AccountNotFoundException;
 import com.channelfive.easyuni.exceptions.InvalidVerificationCodeException;
 import com.channelfive.easyuni.exceptions.UserAlreadyExistException;
-import com.channelfive.easyuni.services.implementations.EmailServiceImpl;
 import com.channelfive.easyuni.services.repositories.AccountRepository;
 import com.channelfive.easyuni.validations.RegisterForm;
 
@@ -30,7 +29,7 @@ public class RegisterService {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private EmailServiceImpl emailService;
+    private EmailService emailService;
 
     public void register(RegisterForm registerForm) throws UserAlreadyExistException {
 
@@ -64,7 +63,7 @@ public class RegisterService {
         String message = MessageFormat.format("Verification Link: {0}/{1}/{2}/{3}", 
         ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(), 
         "register/verify", email, verificationCode);
-        emailService.sendSimpleMessage(email, "EasyUni Verification Email", message);
+        emailService.sendSimpleMessage(email, "EasyUni Verification Email", "message");
     }
 
     private boolean checkIfUserExist(String email) {

@@ -1,4 +1,4 @@
-package com.channelfive.easyuni.services.implementations;
+package com.channelfive.easyuni.services;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmailServiceImpl {
+public class EmailService {
 
     private static final String NOREPLY_ADDRESS = "channelfiveeasyuni@hotmail.com";
     

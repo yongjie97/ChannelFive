@@ -6,11 +6,9 @@ public class AccountNotFoundException extends Exception {
         super();
     }
 
-
     public AccountNotFoundException(String message) {
         super(message);
     }
-
 
     public AccountNotFoundException(String message, Throwable cause) {
         super(message, cause);

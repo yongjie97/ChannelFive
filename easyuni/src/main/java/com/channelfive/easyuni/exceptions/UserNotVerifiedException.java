@@ -6,11 +6,9 @@ public class UserNotVerifiedException extends Exception {
         super();
     }
 
-
     public UserNotVerifiedException(String message) {
         super(message);
     }
-
 
     public UserNotVerifiedException(String message, Throwable cause) {
         super(message, cause);
