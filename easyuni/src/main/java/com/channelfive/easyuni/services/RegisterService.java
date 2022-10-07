@@ -1,16 +1,22 @@
 package com.channelfive.easyuni.services;
 
+import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.channelfive.easyuni.constants.AccountRoleConstant;
 import com.channelfive.easyuni.entities.Account;
+import com.channelfive.easyuni.exceptions.AccountNotFoundException;
+import com.channelfive.easyuni.exceptions.InvalidVerificationCodeException;
 import com.channelfive.easyuni.exceptions.UserAlreadyExistException;
+import com.channelfive.easyuni.services.implementations.EmailServiceImpl;
 import com.channelfive.easyuni.services.repositories.AccountRepository;
 import com.channelfive.easyuni.validations.RegisterForm;
 
@@ -21,23 +27,47 @@ public class RegisterService {
     private AccountRepository accountRepository;
 
     @Autowired
-    PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private EmailServiceImpl emailService;
 
     public void register(RegisterForm registerForm) throws UserAlreadyExistException {
-        //Let's check if user already registered with us
-        if (checkIfUserExist(registerForm.getEmail())) {
+
+        if (checkIfUserExist(registerForm.getEmail()))
             throw new UserAlreadyExistException("User already exists for this email");
-        }
+
         Account accountEntity = new Account();
         BeanUtils.copyProperties(registerForm, accountEntity);
         accountEntity.setPassword(passwordEncoder.encode(registerForm.getPassword()));
         Set<AccountRoleConstant> roles = new HashSet<>();
         roles.add(AccountRoleConstant.USER);
         accountEntity.setRoles(roles);
+        accountEntity.setVerficationCode(RandomStringUtils.randomAlphanumeric(64));
         accountRepository.save(accountEntity);
+        //sendVerificationEmail(accountEntity.getEmail(), accountEntity.getVerficationCode());
     }
 
-    public boolean checkIfUserExist(String email) {
+    public void verifyUser(String email, String verificationCode) 
+        throws AccountNotFoundException, InvalidVerificationCodeException {
+            Account account = accountRepository.findByEmail(email) 
+                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
+
+            if (!account.getVerficationCode().equals(verificationCode))
+                throw new InvalidVerificationCodeException("Invalid verification code");
+
+            account.setVerficationCode(null);
+            accountRepository.save(account);
+    }
+
+    private void sendVerificationEmail(String email, String verificationCode) {
+        String message = MessageFormat.format("Verification Link: {0}/{1}/{2}/{3}", 
+        ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(), 
+        "register/verify", email, verificationCode);
+        emailService.sendSimpleMessage(email, "EasyUni Verification Email", message);
+    }
+
+    private boolean checkIfUserExist(String email) {
         return accountRepository.existsByEmail(email) == true ? true : false;
     }
 }

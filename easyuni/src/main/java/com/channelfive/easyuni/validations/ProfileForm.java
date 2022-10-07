@@ -1,17 +1,12 @@
 package com.channelfive.easyuni.validations;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 
-public class RegisterForm {
+public class ProfileForm {
 
-    @Email(message = "Please provide a valid email id")
+    @Email
     private String email;
 
-    @NotBlank(message = "Password can not be empty")
-    private String password;
-
-    //@NotEmpty(message = "Address can not be empty")
     private String address;
 
     public String getEmail() {
@@ -20,14 +15,6 @@ public class RegisterForm {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getAddress() {

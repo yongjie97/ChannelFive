@@ -8,7 +8,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.channelfive.easyuni.constants.AccountRoleConstant;
@@ -29,6 +28,8 @@ public class Account {
     private String password;
 
     private String address;
+
+    private String verficationCode;
 
     private LocalDateTime accountDate;
 
@@ -74,6 +75,14 @@ public class Account {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getVerficationCode() {
+        return verficationCode;
+    }
+
+    public void setVerficationCode(String verficationCode) {
+        this.verficationCode = verficationCode;
     }
 
     public LocalDateTime getAccountDate() {
