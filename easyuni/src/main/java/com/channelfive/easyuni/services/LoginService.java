@@ -22,7 +22,11 @@ public class LoginService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
       Account account = accountRepository.findByEmail(email)
           .orElseThrow(() -> new UsernameNotFoundException("Email/Password is wrong."));
+        
+      if (!account.getVerficationCode().isEmpty())
+        new UsernameNotFoundException("Account is not verified");
   
       return AccountDetailsImpl.build(account);
     }
+
 }

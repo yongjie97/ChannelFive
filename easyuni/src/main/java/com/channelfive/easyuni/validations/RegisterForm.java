@@ -1,19 +1,17 @@
 package com.channelfive.easyuni.validations;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
 
-public class RegisterForm implements Serializable {
+public class RegisterForm {
 
-    @NotEmpty(message = "Email can not be empty")
     @Email(message = "Please provide a valid email id")
     private String email;
 
-    @NotEmpty(message = "Password can not be empty")
+    @NotBlank(message = "Password can not be empty")
     private String password;
 
-    @NotEmpty(message = "Address can not be empty")
+    //@NotEmpty(message = "Address can not be empty")
     private String address;
 
     public String getEmail() {
