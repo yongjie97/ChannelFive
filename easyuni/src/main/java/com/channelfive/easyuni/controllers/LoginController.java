@@ -1,6 +1,8 @@
 package com.channelfive.easyuni.controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid LoginForm loginForm, HttpServletResponse response) {
+        Map<String, Object> map = new HashMap<>();
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()));
@@ -54,14 +57,16 @@ public class LoginController {
             AccountDetailsImpl accountDetailsImpl = (AccountDetailsImpl) authentication.getPrincipal();
 
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(accountDetailsImpl);
-
-            List<String> roles = accountDetailsImpl.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-                
-            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body("Login Successful");
+            
+            map.put("success", "true");
+            map.put("data", null);
+            map.put("message", null);
+            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(map);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Email/Password is wrong");
+            map.put("success", "false");
+            map.put("data", null);
+            map.put("message", "Email or password is incorrect.");
+            return ResponseEntity.ok().body(map);
         }
     }
 
