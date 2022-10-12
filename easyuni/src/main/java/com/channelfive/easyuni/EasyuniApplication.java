@@ -35,7 +35,7 @@ public class EasyuniApplication {
 	InitializingBean sendDatabase() {
 		return () -> {
 
-			if (universityRepository.count() > 0 &&
+			if (universityRepository.count() > 0 && 
 			schoolRepository.count() > 0 /*&&
 			courseRepository.count() > 0*/) 
 				return;
@@ -116,7 +116,7 @@ public class EasyuniApplication {
 			ntu_schools.add(ntu_cos);
 
 			School ntu_som = new School();
-			ntu_som.setName("Lee Kong Chian School of Medicine");
+			ntu_som.setName("Lee Kong Chian School of Medicine"); 
 			ntu_som.setUniversity(ntu);
 			ntu_schools.add(ntu_som);
 			// End of NTU Schools

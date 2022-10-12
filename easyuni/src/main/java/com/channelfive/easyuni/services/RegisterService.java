@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.channelfive.easyuni.constants.AccountRoleConstant;
+import com.channelfive.easyuni.constants.ExceptionMessages;
 import com.channelfive.easyuni.entities.Account;
 import com.channelfive.easyuni.exceptions.AccountNotFoundException;
 import com.channelfive.easyuni.exceptions.InvalidVerificationCodeException;
@@ -34,7 +35,7 @@ public class RegisterService {
     public void register(RegisterForm registerForm) throws UserAlreadyExistException {
 
         if (checkIfUserExist(registerForm.getEmail()))
-            throw new UserAlreadyExistException("User already exists for this email");
+            throw new UserAlreadyExistException(ExceptionMessages.USER_AE_MSG);
 
         Account accountEntity = new Account();
         BeanUtils.copyProperties(registerForm, accountEntity);
@@ -50,10 +51,10 @@ public class RegisterService {
     public void verifyUser(String email, String verificationCode) 
         throws AccountNotFoundException, InvalidVerificationCodeException {
             Account account = accountRepository.findByEmail(email) 
-                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
+                .orElseThrow(() -> new AccountNotFoundException(ExceptionMessages.ACC_NF_MSG));
 
             if (!account.getVerficationCode().equals(verificationCode))
-                throw new InvalidVerificationCodeException("Invalid verification code");
+                throw new InvalidVerificationCodeException(ExceptionMessages.INVALID_VC_MSG);
 
             account.setVerficationCode(null);
             accountRepository.save(account);

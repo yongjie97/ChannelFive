@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.channelfive.easyuni.constants.ExceptionMessages;
 import com.channelfive.easyuni.entities.Account;
 import com.channelfive.easyuni.services.implementations.AccountDetailsImpl;
 import com.channelfive.easyuni.services.repositories.AccountRepository;
@@ -21,11 +22,8 @@ public class LoginService implements UserDetailsService {
     @Transactional
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
       Account account = accountRepository.findByEmail(email)
-          .orElseThrow(() -> new UsernameNotFoundException("Email/Password is wrong."));
-        
-      if (!account.getVerficationCode().isEmpty())
-        new UsernameNotFoundException("Account is not verified");
-  
+          .orElseThrow(() -> new UsernameNotFoundException(ExceptionMessages.ACC_NF_MSG));
+          
       return AccountDetailsImpl.build(account);
     }
 

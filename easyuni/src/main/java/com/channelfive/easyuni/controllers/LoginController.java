@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.channelfive.easyuni.constants.ExceptionMessages;
+import com.channelfive.easyuni.payload.JSONReponseBuilder;
 import com.channelfive.easyuni.security.jwt.JwtUtils;
 import com.channelfive.easyuni.services.implementations.AccountDetailsImpl;
 import com.channelfive.easyuni.services.repositories.AccountRepository;
@@ -47,7 +50,6 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid LoginForm loginForm, HttpServletResponse response) {
-        Map<String, Object> map = new HashMap<>();
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginForm.getEmail(), loginForm.getPassword()));
@@ -57,16 +59,11 @@ public class LoginController {
             AccountDetailsImpl accountDetailsImpl = (AccountDetailsImpl) authentication.getPrincipal();
 
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(accountDetailsImpl);
-            
-            map.put("success", "true");
-            map.put("data", null);
-            map.put("message", null);
-            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString()).body(map);
-        } catch (Exception e) {
-            map.put("success", "false");
-            map.put("data", null);
-            map.put("message", "Email or password is incorrect.");
-            return ResponseEntity.ok().body(map);
+        
+            return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                .body(JSONReponseBuilder.build(true, null, null));
+        } catch (AuthenticationException e) {
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, ExceptionMessages.EMAIL_PW_WRONG_MSG, null));
         }
     }
 
