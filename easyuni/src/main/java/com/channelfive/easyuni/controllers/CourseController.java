@@ -2,7 +2,6 @@ package com.channelfive.easyuni.controllers;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.channelfive.easyuni.entities.Course;
-import com.channelfive.easyuni.exceptions.CourseNotFoundException;
 import com.channelfive.easyuni.services.CourseService;
 
 @Controller
@@ -41,15 +39,5 @@ public class CourseController {
     public Course createCourse(@RequestBody Course course){
         return courseService.createCourse(course);
     }
-
-
-    public CourseService getCourseService() {
-        return courseService;
-    }
-
-    public void setCourseService(CourseService courseService) {
-        this.courseService = courseService;
-    }
-
 
 }
