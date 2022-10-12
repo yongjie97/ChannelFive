@@ -11,7 +11,6 @@ public class RegisterForm {
     @NotBlank(message = "Password can not be empty")
     private String password;
 
-    //@NotEmpty(message = "Address can not be empty")
     private String address;
 
     public String getEmail() {

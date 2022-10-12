@@ -1,66 +1,50 @@
 package com.channelfive.easyuni.entities;
 
-import javax.validation.constraints.NotBlank;
-
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "courses")
 public class Course {
-
+    
     @Id
-    private int id;
+    private String id;
 
-    @NotBlank
-    private String course_title;
+    private String courseName;
 
-    private int school_id;
+    private School school;
 
-    private String description;
+    private String courseDescription;
 
-    private int starting_salary;
-
-    public Course(String name, int id){
-        this.course_title = name;
-        this.school_id = id;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getCourse_title() {
-        return course_title;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setCourse_title(String course_title) {
-        this.course_title = course_title;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public int getSchool_id() {
-        return school_id;
+    public School getSchool() {
+        return school;
     }
 
-    public void setSchool_id(int school_id) {
-        this.school_id = school_id;
+    public void setSchool(School school) {
+        this.school = school;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCourseDescription() {
+        return courseDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCourseDescription(String courseDescription) {
+        this.courseDescription = courseDescription;
     }
 
-    public void setSalary(int salary){
-        this.starting_salary = salary;
-    }
-
-    public int getSalary(){
-        return starting_salary;
-    }
-    
 }

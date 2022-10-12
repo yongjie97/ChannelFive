@@ -37,7 +37,6 @@ public class ProfileController {
         } catch (AccountNotFoundException e) {
             return ResponseEntity.ok(e.getMessage());
         }
-        //return "account/register.html";
     }
 
     @PutMapping("/profile/update")
