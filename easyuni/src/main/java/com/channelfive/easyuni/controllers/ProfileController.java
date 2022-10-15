@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import com.channelfive.easyuni.constants.ApplicationMessages;
 import com.channelfive.easyuni.entities.Account;
 import com.channelfive.easyuni.exceptions.AccountNotFoundException;
+import com.channelfive.easyuni.payload.JSONReponseBuilder;
 import com.channelfive.easyuni.security.jwt.JwtUtils;
 import com.channelfive.easyuni.services.ProfileService;
 import com.channelfive.easyuni.validations.PasswordForm;
@@ -22,20 +24,25 @@ import com.channelfive.easyuni.validations.ResetPasswordForm;
 public class ProfileController {
 
     @Autowired
-    private ProfileService profileService;
+    ProfileService profileService;
 
     @Autowired
-    private JwtUtils jwtUtils;
+    JwtUtils jwtUtils;
 
     @GetMapping("/profile")
-    public ResponseEntity<?> viewProfile(HttpServletRequest request){
+    public String viewProfile(HttpServletRequest request) {
+        return "account/profile";
+    }
+
+    @GetMapping("/profile/retrieve")
+    public ResponseEntity<?> retrieveProfile(HttpServletRequest request) {
         try {
             String token = jwtUtils.getJwtFromCookies(request);
             String email = jwtUtils.getEmailFromJwtToken(token);
             Account a = profileService.retrieveProfile(email);
-            return ResponseEntity.ok(a.getEmail() + "<br/>" + a.getPassword() + "<br/>" + a.getAddress() + "<br/>" + a.getAccountDate().toString());
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, null, a));
         } catch (AccountNotFoundException e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null));
         }
     }
 
@@ -45,36 +52,41 @@ public class ProfileController {
             String token = jwtUtils.getJwtFromCookies(request);
             String email = jwtUtils.getEmailFromJwtToken(token);
             profileService.saveProfile(profileForm, email);
-            return ResponseEntity.ok("Profile successfully updated");
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, ApplicationMessages.PUPDATED_MSG, null)); 
         } catch (AccountNotFoundException e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null)); 
         }
     }
 
     @GetMapping("/recovery")
     public String passwordRecovery() {
-        return "account/forgot-password.html";
+        return "account/forgot_password";
     }
 
     @PostMapping("/recovery")
     public ResponseEntity<?> resetPassword(@Valid ResetPasswordForm resetPasswordForm) {
         try {
             profileService.resetPassword(resetPasswordForm);
-            return ResponseEntity.ok("Please check your email for the next step");
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, ApplicationMessages.R_PW_MSG, null)); 
         } catch (AccountNotFoundException e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null)); 
         }
     }
 
-    @PutMapping("/profile/password")
+    @GetMapping("/profile/password")
+    public String viewChangePassword() {
+        return "../account/change_password";
+    }
+
+    @PostMapping("/profile/password")
     public ResponseEntity<?> changePassword(@Valid PasswordForm passwordForm, HttpServletRequest request) {
         try {
             String token = jwtUtils.getJwtFromCookies(request);
             String email = jwtUtils.getEmailFromJwtToken(token);
             profileService.changePassword(passwordForm, email);
-            return ResponseEntity.ok("Password has been changed");
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, ApplicationMessages.C_PW_MSG, null)); 
         } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null)); 
         }
     }
     

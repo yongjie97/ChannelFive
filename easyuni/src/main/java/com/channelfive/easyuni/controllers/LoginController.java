@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.channelfive.easyuni.constants.ApplicationMessages;
 import com.channelfive.easyuni.constants.ExceptionMessages;
+import com.channelfive.easyuni.exceptions.UserNotVerifiedException;
 import com.channelfive.easyuni.payload.JSONReponseBuilder;
 import com.channelfive.easyuni.security.jwt.JwtUtils;
 import com.channelfive.easyuni.services.implementations.AccountDetailsImpl;
@@ -45,7 +47,7 @@ public class LoginController {
 
   @GetMapping("/login")
   public String register(final Model model) {
-      return "account/login.html";
+      return "account/login";
   }
 
     @PostMapping("/login")
@@ -58,12 +60,19 @@ public class LoginController {
 
             AccountDetailsImpl accountDetailsImpl = (AccountDetailsImpl) authentication.getPrincipal();
 
+            if (!accountDetailsImpl.isVerified()) {
+                throw new UserNotVerifiedException(ExceptionMessages.ACC_NV_MSG);
+            }
+
             ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(accountDetailsImpl);
         
             return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(JSONReponseBuilder.build(true, null, null));
+                .body(JSONReponseBuilder.build(true, ApplicationMessages.LOGIN_MSG, null));
         } catch (AuthenticationException e) {
             return ResponseEntity.ok().body(JSONReponseBuilder.build(false, ExceptionMessages.EMAIL_PW_WRONG_MSG, null));
+        } catch (UserNotVerifiedException e) {
+            SecurityContextHolder.clearContext();
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null));
         }
     }
 

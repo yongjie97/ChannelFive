@@ -17,7 +17,7 @@ import com.channelfive.easyuni.services.CourseService;
 public class CourseController {
     
     @Autowired
-    private CourseService courseService;
+    CourseService courseService;
 
     //search by title
     @GetMapping("/search")

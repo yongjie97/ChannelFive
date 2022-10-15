@@ -38,7 +38,7 @@ public class ProfileService {
     public void saveProfile(ProfileForm profileForm, String email) throws AccountNotFoundException {
         Account account = accountRepository.findByEmail(email)
         .orElseThrow(() -> new AccountNotFoundException(ExceptionMessages.ACC_NF_MSG));
-        account.setAddress(profileForm.getAddress());
+        account.setZipCode(profileForm.getZipCode());
         accountRepository.save(account);
     }
 
@@ -56,11 +56,12 @@ public class ProfileService {
             Account account = accountRepository.findByEmail(email)
             .orElseThrow(() -> new AccountNotFoundException(ExceptionMessages.ACC_NF_MSG));
 
-            Authentication authentication = authenticationManager.authenticate(
+            try {
+                authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, passwordForm.getOldPassword()));
-
-            if (!authentication.isAuthenticated())
+            } catch (Exception e) {
                 throw new OldPasswordNotMatchException(ExceptionMessages.OLD_PW_NM_MSG);
+            }
     
             String newPassword = passwordEncoder.encode(passwordForm.getNewPassword());
             account.setPassword(newPassword);

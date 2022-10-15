@@ -7,7 +7,17 @@ public class ProfileForm {
     @Email
     private String email;
 
-    private String address;
+    private String zipCode;
+
+    private String displayName;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
     public String getEmail() {
         return email;
@@ -17,12 +27,12 @@ public class ProfileForm {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
     
 }

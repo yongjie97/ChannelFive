@@ -15,11 +15,11 @@ import com.channelfive.easyuni.services.UniversityService;
 public class UniversityController {
 
     @Autowired
-    private UniversityService universityService;
+    UniversityService universityService;
 
     @GetMapping("/university")
     public String index() {
-        return "university/university.html";
+        return "university/university";
     }
 
     @GetMapping("/api/university/{uni_name}")

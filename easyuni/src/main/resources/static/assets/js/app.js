@@ -18,7 +18,7 @@ const navBar = {
                                 <a class="nav-link btn-outline-primary rounded-pill px-3" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn-outline-primary rounded-pill px-3" href="about.html">Course</a>
+                                <a class="nav-link btn-outline-primary rounded-pill px-3" href="/profile">Course</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link btn-outline-primary rounded-pill px-3" href="work.html">Discussion</a>
@@ -36,7 +36,3 @@ const navBar = {
 const app = Vue.createApp({});
 app.component("navi-bar", navBar);
 app.mount("#app");
-
-$(document).ready(function() {
-    console.log($cookies.isKey("token"));
-});
