@@ -5,6 +5,7 @@ import java.text.MessageFormat;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.jsoup.Jsoup;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +76,7 @@ public class RegisterService {
         ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(), 
         "register/verify", email, verificationCode);
         try {
-            File htmlPath = new ClassPathResource("static/email/email.html").getFile();
+            File htmlPath = new ClassPathResource("static/email/email2.html").getFile();
             String htmlBody = MessageFormat.format(Jsoup.parse(htmlPath).html(), message);
             emailService.sendHtmlMessage(email, "EasyUni Verification Email", htmlBody);
         } catch (Exception e) {

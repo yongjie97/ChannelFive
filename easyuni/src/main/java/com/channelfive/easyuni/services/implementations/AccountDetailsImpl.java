@@ -20,6 +20,8 @@ private static final long serialVersionUID = 1L;
 
   private String email;
 
+  private String displayName;
+
   private String zipCode;
 
   @JsonIgnore
@@ -31,11 +33,12 @@ private static final long serialVersionUID = 1L;
 
   private Boolean verified;
 
-  public AccountDetailsImpl(String id, String zipCode, String email, String password, 
+  public AccountDetailsImpl(String id, String zipCode, String email, String displayName, String password, 
         LocalDateTime accountDate, Collection<? extends GrantedAuthority> authorities, Boolean verified) {
     this.id = id;
     this.zipCode = zipCode;
     this.email = email;
+    this.displayName = displayName;
     this.password = password;
     this.accountDate = accountDate;
     this.authorities = authorities;
@@ -51,6 +54,7 @@ private static final long serialVersionUID = 1L;
         account.getId(), 
         account.getZipCode(), 
         account.getEmail(),
+        account.getDisplayName(),
         account.getPassword(), 
         account.getAccountDate(),
         authorities,
@@ -68,6 +72,10 @@ private static final long serialVersionUID = 1L;
 
   public String getEmail() {
     return email;
+  }
+
+  public String getDisplayName() {
+    return displayName;
   }
 
   @Override
