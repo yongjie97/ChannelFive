@@ -6,7 +6,7 @@ Lab Project for SC2006 Software Engineer Module
 - Maven 4.0.0
 - IDE Visual Studio Code 1.7.1
 - Java 17
-- MySQL tbc
+- MongoDB
 
 ## Target Audience
 Pre-university students seeking information to make a better judgements when choosing school and course.
