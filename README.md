@@ -1,5 +1,5 @@
 # EasyUni by ChannelFive
-Lab Project for SC2005 Software Engineer Module
+Lab Project for SC2006 Software Engineer Module
 
 ## Technologies & Tools Requirements
 - Spring Boot 2.7.3
