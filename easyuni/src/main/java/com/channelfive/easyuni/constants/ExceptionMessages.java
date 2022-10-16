@@ -10,5 +10,7 @@ public class ExceptionMessages {
     public static final String ACC_NV_MSG = "Account has not been verified.";
 
     public static final String EMAIL_PW_WRONG_MSG = "Email/Password is invalid.";
+
+    public static final String DIS_NF_MSG = "Discussion not found.";
     
 }

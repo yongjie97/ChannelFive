@@ -8,5 +8,6 @@ public class ApplicationMessages {
     public final static String S_REG_MSG = "Register successful";
     public final static String VERIFIED_MSG = "Account have been successfully verified. You may now log in.";
     public final static String LOGIN_MSG = "Log in successful.";
+    public final static String DIS_MSG = "Discussion has been created";
     
 }
