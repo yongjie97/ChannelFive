@@ -11,9 +11,7 @@ public class Course {
 
     private String courseName;
 
-    private School school;
-
-    private String courseDescription;
+    private String schoolId;
 
     public String getId() {
         return id;
@@ -31,20 +29,12 @@ public class Course {
         this.courseName = courseName;
     }
 
-    public School getSchool() {
-        return school;
+    public String getSchoolId() {
+        return schoolId;
     }
 
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public String getCourseDescription() {
-        return courseDescription;
-    }
-
-    public void setCourseDescription(String courseDescription) {
-        this.courseDescription = courseDescription;
+    public void setSchool(String schoolId) {
+        this.schoolId = schoolId;
     }
 
 }

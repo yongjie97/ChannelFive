@@ -32,7 +32,7 @@ public class RegisterService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+    @Autowired 
     private EmailService emailService;
 
     public void register(RegisterForm registerForm) throws UserAlreadyExistException {
@@ -46,10 +46,10 @@ public class RegisterService {
         Set<AccountRoleConstant> roles = new HashSet<>();
         roles.add(AccountRoleConstant.USER);
         accountEntity.setRoles(roles);
-        accountEntity.setVerficationCode(RandomStringUtils.randomAlphanumeric(64));
+        //accountEntity.setVerficationCode(RandomStringUtils.randomAlphanumeric(64));
         accountRepository.save(accountEntity);
         //sendVerificationEmail(accountEntity.getEmail(), accountEntity.getVerficationCode());
-        sendVerficationEmailHtml(accountEntity.getEmail(), accountEntity.getVerficationCode());
+        //sendVerficationEmailHtml(accountEntity.getEmail(), accountEntity.getVerficationCode());
     }
 
     public void verifyUser(String email, String verificationCode) 

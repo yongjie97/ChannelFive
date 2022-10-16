@@ -73,9 +73,9 @@ public class ProfileController {
         }
     }
 
-    @GetMapping("/profile/password")
+    @GetMapping("/change_password")
     public String viewChangePassword() {
-        return "../account/change_password";
+        return "account/change_password";
     }
 
     @PostMapping("/profile/password")

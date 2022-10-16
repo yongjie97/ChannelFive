@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 @Document(collection = "schools")
 public class School {
@@ -13,8 +14,9 @@ public class School {
 
     private String name;
 
-    private University university;
+    private String universityId;
 
+    @DocumentReference
     private List<Course> courses;
 
     public String getId() {
@@ -33,12 +35,12 @@ public class School {
         this.name = name;
     }
 
-    public University getUniversity() {
-        return university;
+    public String getUniversityId() {
+        return universityId;
     }
 
-    public void setUniversity(University university) {
-        this.university = university;
+    public void setUniversityId(String universityId) {
+        this.universityId = universityId;
     }
 
     public List<Course> getCourses() {

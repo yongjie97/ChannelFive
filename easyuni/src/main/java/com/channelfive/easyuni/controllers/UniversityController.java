@@ -17,19 +17,25 @@ public class UniversityController {
     @Autowired
     UniversityService universityService;
 
-    @GetMapping("/university")
-    public String index() {
-        return "university/university";
-    }
-
-    @GetMapping("/api/university/{uni_name}")
-    public ResponseEntity<?> universityInfo(@PathVariable String uni_name) {
-        String query = uni_name.replace("-", " ");
+    @GetMapping("/university/{uniName}")
+    public ResponseEntity<?> index(@PathVariable String uniName) {
+        String query = uniName.replace("-", " ");
         try {
             University university = universityService.getUniversityInfo(query);
             return ResponseEntity.ok().body(JSONReponseBuilder.build(true, null, university));
         } catch (UniversityNotFoundException e) {
-            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, e.getMessage(), null));
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), query));
+        }
+    }
+
+    @GetMapping("/api/university/{uni_name}")
+    public ResponseEntity<?> universityInfo(@PathVariable String uni_name) {
+        try {
+            String query = uni_name.replace("-", " ");
+            University university = universityService.getUniversityInfo(query);
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, null, university));
+        } catch (UniversityNotFoundException e) {
+            return ResponseEntity.ok().body(JSONReponseBuilder.build(false, e.getMessage(), null));
         }
     }
     
