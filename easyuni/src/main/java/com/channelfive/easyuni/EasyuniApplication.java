@@ -10,6 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.channelfive.easyuni.entities.Course;
+
+import com.channelfive.easyuni.entities.CourseIGP;
+
 import com.channelfive.easyuni.entities.School;
 import com.channelfive.easyuni.entities.University;
 import com.channelfive.easyuni.services.repositories.CourseRepository;
@@ -155,78 +158,259 @@ public class EasyuniApplication {
 			// End of Saving Schools & Update Universities
 
 			// Start of NUS Courses
-			List<Course> nus_courses = new ArrayList<Course>();
-			List<Course> nus_sode_courses = new ArrayList<Course>();
-			Course nus_aia = new Course();
-			nus_aia.setCourseName("Bachelor in Architecture");
-			nus_aia.setSchool(nus_sode.getId());
-			nus_sode_courses.add(nus_aia);
+			List<Course> nus_courses_de = new ArrayList<Course>();
+			Course nus_archi = new Course();
+			nus_archi.setCourseName("NUS Architecture");
+			nus_archi.setSchoolId(nus_sode.getId());
+			nus_courses_de.add(nus_archi);
 
-			Course nus_id = new Course();
-			nus_id.setCourseName("Bachelor in Industrial Design");
-			nus_id.setSchool(nus_sode.getId());
-			nus_sode_courses.add(nus_id);
+			Course nus_realEstate = new Course();
+			nus_realEstate.setCourseName("NUS Real Estate");
+			nus_realEstate.setSchoolId(nus_sode.getId());
+			nus_courses_de.add(nus_realEstate);
 
-			Course nus_la = new Course();
-			nus_la.setCourseName("Bachelor in Landscape Architecture");
-			nus_la.setSchool(nus_sode.getId());
-			nus_sode_courses.add(nus_la);
+			List<Course> nus_courses_biz = new ArrayList<Course>();
+			Course nus_bizAd = new Course();
+			nus_bizAd.setCourseName("NUS Business Administration");
+			nus_bizAd.setSchoolId(nus_bs.getId());
+			nus_courses_biz.add(nus_bizAd);
 
-			nus_sode.setCourses(nus_sode_courses);
-			nus_courses.addAll(nus_sode_courses);
-
-			List<Course> nus_bs_courses = new ArrayList<Course>();
-			Course nus_ba = new Course();
-			nus_ba.setCourseName("Bachelor in Business Administration");
-			nus_ba.setSchool(nus_bs.getId());
-			nus_bs_courses.add(nus_ba);
-
-			Course nus_baa = new Course();
-			nus_baa.setCourseName("Bachelor in Business Administration (Accountancy)");
-			nus_baa.setSchool(nus_bs.getId());
-			nus_bs_courses.add(nus_baa);
-
-			nus_bs.setCourses(nus_bs_courses);
-			nus_courses.addAll(nus_bs_courses);
-
-			List<Course> nus_c_courses = new ArrayList<Course>();
-			Course nus_biza = new Course();
-			nus_biza.setCourseName("Bachelor in Business Analytics");
-			nus_biza.setSchool(nus_c.getId());
-			nus_c_courses.add(nus_biza);
-
+			List<Course> nus_courses_cs = new ArrayList<Course>();
 			Course nus_cs = new Course();
-			nus_cs.setCourseName("Bachelor in Computer Science");
-			nus_cs.setSchool(nus_c.getId());
-			nus_c_courses.add(nus_cs);
+			nus_cs.setCourseName("NUS Computer Science");
+			nus_cs.setSchoolId(nus_c.getId());
+			nus_courses_cs.add(nus_cs);
 
 			Course nus_is = new Course();
-			nus_is.setCourseName("Bachelor in Information Security");
-			nus_is.setSchool(nus_c.getId());
-			nus_c_courses.add(nus_is);
+			nus_is.setCourseName("NUS Information Systems");
+			nus_is.setSchoolId(nus_c.getId());
+			nus_courses_cs.add(nus_is);
 
-			Course nus_ifs = new Course();
-			nus_ifs.setCourseName("Bachelor in Information Systems");
-			nus_ifs.setSchool(nus_c.getId());
-			nus_c_courses.add(nus_ifs);
+			List<Course> nus_courses_dent = new ArrayList<Course>();
+			Course nus_dent = new Course();
+			nus_dent.setCourseName("NUS Dentistry");
+			nus_dent.setSchoolId(nus_foc.getId());
+			nus_courses_dent.add(nus_dent);
+			//End of NUS courses
 
-			nus_c.setCourses(nus_c_courses);
-			nus_courses.addAll(nus_c_courses);
+			//Start of NTU courses
+			List<Course> ntu_courses_nbs = new ArrayList<Course>();
+			Course ntu_biz = new Course();
+			ntu_biz.setCourseName("NBS Business");
+			ntu_biz.setSchoolId(ntu_nbs.getId());
+			ntu_courses_nbs.add(ntu_biz);
 
-			List<Course> nus_foc_courses = new ArrayList<Course>();
-			Course nus_d = new Course();
-			nus_d.setCourseName("Bachelor in Dentistry");
-			nus_d.setSchool(nus_foc.getId());
-			nus_foc_courses.add(nus_d);
+			List<Course> ntu_courses_eng = new ArrayList<Course>();
+			Course ntu_cs = new Course();
+			ntu_cs.setCourseName("NTU Computer Science");
+			ntu_cs.setSchoolId(ntu_coe.getId());
+			ntu_courses_eng.add(ntu_cs);
 
-			nus_foc.setCourses(nus_foc_courses);
-			nus_courses.addAll(nus_foc_courses);
-			// End of NUS Course
+			Course ntu_bioeng = new Course();
+			ntu_bioeng.setCourseName("NTU Bioengineering");
+			ntu_bioeng.setSchoolId(ntu_coe.getId());
+			ntu_courses_eng.add(ntu_bioeng);
 
-			// Start of Saving Courses
-			courseRepository.saveAll(nus_courses);
-			schoolRepository.saveAll(nus_schools);
-			// End of Saving Courses
+			List<Course> ntu_courses_humans = new ArrayList<Course>();
+			Course ntu_econs = new Course();
+			ntu_econs.setCourseName("NTU Economics");
+			ntu_econs.setSchoolId(ntu_coh.getId());
+			ntu_courses_humans.add(ntu_econs);
+
+			Course ntu_soci = new Course();
+			ntu_soci.setCourseName("NTU Sociology");
+			ntu_soci.setSchoolId(ntu_coh.getId());
+			ntu_courses_humans.add(ntu_soci);
+
+			List<Course> ntu_courses_sci = new ArrayList<Course>();
+			Course ntu_bioS = new Course();
+			ntu_bioS.setCourseName("NTU Biological Science");
+			ntu_bioS.setSchoolId(ntu_cos.getId());
+			ntu_courses_sci.add(ntu_bioS);
+
+			List<Course> ntu_courses_lkc = new ArrayList<Course>();
+			Course ntu_med = new Course();
+			ntu_med.setCourseName("NTU Lee Kong Chain Medicine");
+			ntu_med.setSchoolId(ntu_som.getId());
+			ntu_courses_lkc.add(ntu_med);
+			//End of NTU courses
+
+			//Start of SMU courses
+			List<Course> smu_courses_acc = new ArrayList<Course>();
+			//placeholder portion for SMU college of integrative studies, not sure if got any courses
+
+			Course smu_account = new Course();
+			smu_account.setCourseName("SMU Bachelor of Accounting");
+			smu_account.setSchoolId(smu_soa.getId());
+			smu_courses_acc.add(smu_account);
+
+			List<Course> smu_courses_biz = new ArrayList<Course>();
+			Course smu_bizMan = new Course();
+			smu_bizMan.setCourseName("SMU Bachelor of Business Management");
+			smu_bizMan.setSchoolId(smu_sob.getId());
+			smu_courses_biz.add(smu_bizMan);
+
+			List<Course> smu_courses_econ = new ArrayList<Course>();
+			Course smu_econ = new Course();
+			smu_econ.setCourseName("SMU Bachelor of Science (Economics)");
+			smu_econ.setSchoolId(smu_soe.getId());
+			smu_courses_econ.add(smu_econ);
+			//End of SMU courses
+
+			//Start of Saving Courses & Update Schools
+			//Start of NUS part
+			nus_sode.setCourses(nus_courses_de);
+			nus_bs.setCourses(nus_courses_biz);
+			nus_c.setCourses(nus_courses_cs);
+			nus_foc.setCourses(nus_courses_dent);
+			courseRepository.saveAll(nus_courses_de);
+			courseRepository.saveAll(nus_courses_biz);
+			courseRepository.saveAll(nus_courses_cs);
+			courseRepository.saveAll(nus_courses_dent);
+			schoolRepository.save(nus_sode);
+			schoolRepository.save(nus_bs);
+			schoolRepository.save(nus_c);
+			schoolRepository.save(nus_foc);
+			//End of NUS part
+
+			//Start of NTU part
+			ntu_nbs.setCourses(ntu_courses_nbs);
+			ntu_coe.setCourses(ntu_courses_eng);
+			ntu_coh.setCourses(ntu_courses_humans);
+			ntu_cos.setCourses(ntu_courses_sci);
+			ntu_som.setCourses(ntu_courses_lkc);
+			courseRepository.saveAll(ntu_courses_nbs);
+			courseRepository.saveAll(ntu_courses_eng);
+			courseRepository.saveAll(ntu_courses_humans);
+			courseRepository.saveAll(ntu_courses_sci);
+			courseRepository.saveAll(ntu_courses_lkc);
+			schoolRepository.save(ntu_nbs);
+			schoolRepository.save(ntu_coe);
+			schoolRepository.save(ntu_coh);
+			schoolRepository.save(ntu_cos);
+			schoolRepository.save(ntu_som);
+			//End of NTU part
+
+			//Start of SMU part
+			smu_soa.setCourses(smu_courses_acc);
+			smu_sob.setCourses(smu_courses_biz);
+			smu_soe.setCourses(smu_courses_econ);
+			courseRepository.saveAll(smu_courses_acc);
+			courseRepository.saveAll(smu_courses_biz);
+			courseRepository.saveAll(smu_courses_econ);
+			schoolRepository.save(smu_soa);
+			schoolRepository.save(smu_sob);
+			schoolRepository.save(smu_soe);
+			//End of SMU part
+			//End of Saving Courses and Updating Schools
+
+			//Start of NUS Courses IGP
+			List<CourseIGP> nus_cs_igp = new ArrayList<CourseIGP>();
+			CourseIGP nus_cs_2019 = new CourseIGP();
+			nus_cs_2019.setIGP10th("AAA/A");
+			nus_cs_2019.setIGP90th("AAA/A");
+			nus_cs_2019.setcourse(nus_cs);
+			nus_cs_igp.add(nus_cs_2019);
+
+			CourseIGP nus_cs_2020 = new CourseIGP();
+			nus_cs_2020.setIGP10th("AAA/A");
+			nus_cs_2020.setIGP90th("AAA/A");
+			nus_cs_2020.setcourse(nus_cs);
+			nus_cs_igp.add(nus_cs_2020);
+			
+			CourseIGP nus_cs_2021 = new CourseIGP();
+			nus_cs_2021.setIGP10th("AAA/A");
+			nus_cs_2021.setIGP90th("AAA/A");
+			nus_cs_2021.setcourse(nus_cs);
+			nus_cs_igp.add(nus_cs_2021);
+
+			List<CourseIGP> nus_biz_igp = new ArrayList<CourseIGP>();
+			CourseIGP nus_bizAd_2019 = new CourseIGP();
+			nus_bizAd_2019.setIGP90th("AAA/A");
+			nus_bizAd_2019.setIGP10th("AAB/C");
+			nus_biz_igp.add(nus_bizAd_2019);
+
+			CourseIGP nus_bizAd_2020 = new CourseIGP();
+			nus_bizAd_2020.setIGP90th("AAA/A");
+			nus_bizAd_2020.setIGP10th("AAB/C");
+			nus_biz_igp.add(nus_bizAd_2020);
+
+			CourseIGP nus_bizAd_2021 = new CourseIGP();
+			nus_bizAd_2021.setIGP90th("AAA/A");
+			nus_bizAd_2021.setIGP10th("ABB/C");
+			nus_biz_igp.add(nus_bizAd_2021);
+			//End of NUS courses IGP
+
+			//Start of NTU courses IGP
+			List<CourseIGP> ntu_cs_igp = new ArrayList<CourseIGP>();
+			CourseIGP ntu_cs_2019 = new CourseIGP();
+			ntu_cs_2019.setIGP90th("AAA/A");
+			ntu_cs_2019.setIGP10th("AAC/C");
+			ntu_cs_igp.add(ntu_cs_2019);
+
+			CourseIGP ntu_cs_2020 = new CourseIGP();
+			ntu_cs_2020.setIGP90th("AAA/A");
+			ntu_cs_2020.setIGP10th("AAA/B");
+			ntu_cs_igp.add(ntu_cs_2020);
+
+			CourseIGP ntu_cs_2021 = new CourseIGP();
+			ntu_cs_2021.setIGP90th("AAA/A");
+			ntu_cs_2021.setIGP10th("AAA/B");
+			ntu_cs_igp.add(ntu_cs_2021);
+
+			List<CourseIGP> ntu_coh_igp = new ArrayList<CourseIGP>();
+			CourseIGP ntu_soci_2019 = new CourseIGP();
+			ntu_soci_2019.setIGP90th("AAA/A");
+			ntu_soci_2019.setIGP10th("BBC/C");
+			ntu_coh_igp.add(ntu_soci_2019);
+
+			CourseIGP ntu_soci_2020 = new CourseIGP();
+			ntu_soci_2020.setIGP90th("AAA/A");
+			ntu_soci_2020.setIGP10th("BBC/C");
+			ntu_coh_igp.add(ntu_soci_2020);
+
+			CourseIGP ntu_soci_2021 = new CourseIGP();
+			ntu_soci_2021.setIGP90th("AAA/A");
+			ntu_soci_2021.setIGP10th("ABC/C");
+			ntu_coh_igp.add(ntu_soci_2021);
+			//End of NTU Course IGP 
+
+			//Start of SMU Course IGP 
+			List<CourseIGP> smu_soa_igp = new ArrayList<CourseIGP>();
+			CourseIGP smu_soa_2019 = new CourseIGP();
+			smu_soa_2019.setIGP90th("AAA/A");
+			smu_soa_2019.setIGP10th("ABB/C");
+			smu_soa_igp.add(smu_soa_2019);
+
+			CourseIGP smu_soa_2020 = new CourseIGP();
+			smu_soa_2020.setIGP90th("AAA/A");
+			smu_soa_2020.setIGP10th("BBC/C");
+			smu_soa_igp.add(smu_soa_2020);
+
+			CourseIGP smu_soa_2021 = new CourseIGP();
+			smu_soa_2021.setIGP90th("AAA/A");
+			smu_soa_2021.setIGP10th("BBC/C");
+			smu_soa_igp.add(smu_soa_2021);
+
+			List<CourseIGP> smu_sob_igp = new ArrayList<CourseIGP>();
+			CourseIGP smu_bizm_2019 = new CourseIGP();
+			smu_bizm_2019.setIGP90th("AAA/A");
+			smu_bizm_2019.setIGP10th("ABB/C");
+			smu_sob_igp.add(smu_bizm_2019);
+
+			CourseIGP smu_bizm_2020 = new CourseIGP();
+			smu_bizm_2020.setIGP90th("AAA/A");
+			smu_bizm_2020.setIGP10th("BBB/C");
+			smu_sob_igp.add(smu_bizm_2020);
+
+			CourseIGP smu_bizm_2021 = new CourseIGP();
+			smu_bizm_2021.setIGP90th("AAA/A");
+			smu_bizm_2021.setIGP10th("BBB/B");
+			smu_sob_igp.add(smu_bizm_2021);
+			//End of SMU courses IGP
+
+			//Start of Saving course IGP and updating Courses
+
 
 		};
 	}

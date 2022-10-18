@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.channelfive.easyuni.entities.Course;
+import com.channelfive.easyuni.entities.CourseIGP;
 import com.channelfive.easyuni.services.CourseService;
 
 @Controller
@@ -40,4 +41,13 @@ public class CourseController {
         return courseService.createCourse(course);
     }
 
+    /*@GetMapping("/searchIGP")
+    public ResponseEntity<List<CourseIGP>> searchCourseByIGP(@RequestParam("query") String query){
+        try {
+            courseService.searchCourseByTitle(query);
+        } catch (CourseNotFoundException e) {
+            return ResponseEntity.ok().body("Sorry! Course does not exist.");
+        }
+        return ResponseEntity.ok(courseService.searchCourseByIGP(query));
+    }*/
 }

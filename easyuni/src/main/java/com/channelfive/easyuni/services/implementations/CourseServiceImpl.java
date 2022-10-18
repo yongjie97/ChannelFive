@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.channelfive.easyuni.entities.Course;
+import com.channelfive.easyuni.entities.CourseIGP;
 import com.channelfive.easyuni.services.CourseService;
 import com.channelfive.easyuni.services.repositories.CourseRepository;
+import com.channelfive.easyuni.services.repositories.CourseIGPRepository;
 
 @Service
 public class CourseServiceImpl implements CourseService{
@@ -33,6 +35,12 @@ public class CourseServiceImpl implements CourseService{
         List<Course> course = courseRepository.searchCourseSortedBySalary(query);
         return course;
     }
+
+    /*@Override
+    public List<CourseIGP> searchCourseSortedByIGP(String query) {
+        List<CourseIGP> courseIGP = CourseIGPRepository.searchCourseSortedByIGP(query);
+        return courseIGP;
+    }*/
 
     
 }
