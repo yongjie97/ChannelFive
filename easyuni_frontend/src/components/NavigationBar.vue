@@ -15,13 +15,19 @@
                                 <a class="nav-link px-3" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link px-3" href="/profile">Course</a>
+                                <a class="nav-link px-3" href="#">Course</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link px-3" href="work.html">Discussion</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link px-3" href="login">Log In</a>
+                            <li class="nav-item" v-if="!loggedIn">
+                                <a class="nav-link px-3" href="/login">Log In</a>
+                            </li>
+                            <li class="nav-item" v-if="loggedIn">
+                                <a class="nav-link px-3" href="/profile">Profile</a>
+                            </li>
+                            <li class="nav-item" v-if="loggedIn">
+                                <a class="nav-link px-3" @click="logOut()" href="http://localhost:3000">Log Out</a>
                             </li>
                         </ul>
                     </div>
@@ -32,7 +38,22 @@
 
 <script>
     export default {
-        name: 'NavigationBar'
+        name: 'NavigationBar',
+        data() {
+            return { 
+                loggedIn: false
+            }
+        },
+        created() {
+            if (this.$cookies.get('token')) {
+                this.loggedIn = true;
+            }
+        },
+        methods: {
+            logOut() {
+                this.$cookies.remove('token');
+            },
+        }
     }
 </script>
 

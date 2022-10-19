@@ -10,8 +10,8 @@
         <section class="container overflow-hidden">
             <div class="row mb-5">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="e.g. Computer Science NTU" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-warning text-white">Search</button>
+                    <input type="search" v-model="search" class="form-control rounded" placeholder="e.g. Computer Science NTU" aria-label="Search" aria-describedby="search-addon" />
+                    <button @click.prevent="submit()" type="button" class="btn btn-warning text-white">Search</button>
                 </div>
             </div>
 
@@ -60,7 +60,25 @@
 
 <script>
     export default {
-        name: 'Search'
+        name: 'Search',
+        data() {
+            return {
+                search: ''
+            }
+        },
+        methods: {
+            submit: function() {
+                if (this.search.trim() === '')
+                    return;
+                    axios({ method:'get', 
+                        url: "http://localhost:8080/course/search", 
+                        params: { 'query': this.search }
+                    }).then((res) => {
+                        if (res.data.success)
+                            console.log(res.data)
+                    })
+            }
+        }
     }
 </script>
 

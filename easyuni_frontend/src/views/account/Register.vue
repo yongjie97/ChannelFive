@@ -14,28 +14,33 @@
                       <div class="col-md-6 col-lg-7 d-flex align-items-center">
                         <div class="card-body p-4 p-lg-5 text-black">
           
-                          <form id="registerForm" action="/register" method="post">
+                          <form id="registerForm" @submit.prevent="submit">
                             <h4 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Register Account</h4>
-                            <p></p>
+                            <p class="fw-normal mb-3 alert alert-success" v-if="successMessage">{{ successMessage }}</p>
+                            <p class="fw-normal mb-3 alert alert-danger" v-if="failMessage">{{ failMessage }}</p>
           
                             <div class="form-outline mb-4">
-                              <input type="email" id="email" name="email" class="form-control form-control-lg" />
-                              <label class="form-label" for="email">Email address*</label>
+                                <label class="form-label" for="email">Email address*</label>
+                                <input type="email" id="email" v-model="email" name="email" class="form-control form-control-lg" :class="{ 'border-danger': v$.email.$error }" />
+                                <div class="form-label text-danger" v-if="v$.email.$error">Please enter a valid email</div>
                             </div>
           
                             <div class="form-outline mb-4">
-                              <input type="password" id="password" name="password" class="form-control form-control-lg" />
-                              <label class="form-label" for="password">Password*</label>
+                                <label class="form-label" for="password">Password*</label>
+                                <input type="password" id="password" v-model="password" name="password" class="form-control form-control-lg" :class="{ 'border-danger': v$.password.$error }" />
+                                <div class="form-label text-danger" v-if="v$.password.$error">Please enter your password</div>
                             </div>
     
                             <div class="form-outline mb-4">
-                                <input type="text" id="displayName" name="displayName" class="form-control form-control-lg" />
                                 <label class="form-label" for="displayName">Display Name*</label>
+                                <input type="text" id="displayName" v-model="displayName" name="displayName" class="form-control form-control-lg" :class="{ 'border-danger': v$.displayName.$error }" />
+                                <div class="form-label text-danger" v-if="v$.displayName.$error">Please enter a display name</div>
                             </div>
     
                             <div class="form-outline mb-4">
-                                <input type="text" id="zipCode" name="zipCode" class="form-control form-control-lg" />
-                                <label class="form-label" for="zipCode">Zip Code</label>
+                                <label class="form-label" for="zipCode">Zip Code*</label>
+                                <input type="text" id="zipCode" v-model="zipCode" name="zipCode" class="form-control form-control-lg" :class="{ 'border-danger': v$.zipCode.$error }" />
+                                <div class="form-label text-danger" v-if="v$.zipCode.$error">Please enter a valid zip code</div>
                             </div>
           
                             <div class="pt-1 mb-4">
@@ -56,8 +61,72 @@
 </template>
 
 <script>    
+
+    import { useVuelidate } from '@vuelidate/core'
+    import { required, email, minLength, maxLength, numeric } from '@vuelidate/validators'
+
     export default {
-        name: 'Register'
+        name: 'Register',
+        setup () {
+            return { v$: useVuelidate() }
+        },
+        data() {
+            return {
+                email: null,
+                password: null,
+                displayName: null,
+                zipCode: null,
+                successMessage: null,
+                failMessage: null,
+            }
+        },
+        validations: {
+            email: {
+              required,
+              email
+            },
+            password: {
+              required
+            },
+            displayName: {
+              required
+            },
+            zipCode: {
+              required,
+              numeric,
+              minLength: minLength(6),
+              maxLength: maxLength(6)
+            }
+        },
+        methods: {
+            submit: function(e) {
+                this.v$.$validate()
+                if (!this.v$.$error) {
+                    var registerForm = new FormData();
+                    registerForm.append('email', this.email);
+                    registerForm.append('password', this.password);
+                    registerForm.append('displayName', this.displayName);
+                    registerForm.append('zipCode', this.zipCode);
+                    axios({ method:'post', 
+                        url: "http://localhost:8080/register", 
+                        data: registerForm, 
+                        headers: {"Content-Type":"multipart/form-data"},
+                        withCredentials: true
+                    }).then((res) => {
+                      if (res.data.success) {
+                          this.successMessage = res.data.message
+                          this.failMessage = null
+                      } else {
+                          this.failMessage = res.data.message
+                          this.successMessage = null
+                      }
+                    }).catch((error) => {
+                        this.failMessage = "Opps! Something went wrong. Please try again later."
+                        this.successMessage = null
+                    })
+                }
+            }
+        }
     }
 </script>
 

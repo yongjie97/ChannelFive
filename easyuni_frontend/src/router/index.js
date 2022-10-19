@@ -5,7 +5,7 @@ import ForgotPassword from '../views/account/ForgotPassword'
 import Register from '../views/account/Register'
 import Profile from '../views/account/Profile'
 import ChangePassword from '../views/account/ChangePassword'
-
+import University from '../views/University'
 import Error from '../views/404'
 
 const routes = [
@@ -38,6 +38,11 @@ const routes = [
     path: '/profile/password',
     name: 'ChangePassword',
     component: ChangePassword,
+  },
+  {
+    path: '/university/:uniName',
+    name: 'University',
+    component: University,
   },
   {
     path: '/:pathMatch(.*)*',
