@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.channelfive.easyuni.constants.ExceptionMessages;
@@ -40,15 +43,24 @@ public class DiscussionService {
         return discussion;
     }
 
-    public void createDiscussion(String email, DiscussionForm discussionForm) throws AccountNotFoundException {
+    public List<Discussion> retrieveDiscussions(int page, int size) {
+        List<Discussion> discussions = new ArrayList<>();
+        Pageable paging = PageRequest.of(page, size);
+        Page<Discussion> pageDiscussions = discussionRepository.findAllByOrderByDateDesc(paging);
+        discussions = pageDiscussions.getContent();
+        return discussions;
+    }
+
+    public Discussion createDiscussion(String email, DiscussionForm discussionForm) throws AccountNotFoundException {
         Account account = accountRepository.findByEmail(email)
         .orElseThrow(() -> new AccountNotFoundException(ExceptionMessages.ACC_NF_MSG));
         
         Discussion discussion = new Discussion();
-        discussion.setUserId(account.getId());
+        discussion.setAuthor(account);
         discussion.setTitle(discussionForm.getTitle());
         discussion.setMessage(discussionForm.getMessage());
         discussionRepository.save(discussion);
+        return discussion;
     }
 
     public void createDiscussionReply(String email, String discussionId, DiscussionReplyForm discussionReplyForm) throws AccountNotFoundException {
@@ -68,11 +80,10 @@ public class DiscussionService {
 
         DiscussionReply reply = new DiscussionReply();
         reply.setMessage(discussionReplyForm.getMessage());
-        reply.setUserId(account.getId());
+        reply.setAuthor(account);
         reply.setDiscussionId(discussionId);
         replies.add(reply);
         discussionReplyRepository.save(reply);
-
         discussionRepository.save(discussion);
     }
     

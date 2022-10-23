@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.channelfive.easyuni.security.jwt.AuthEntryPointJwt;
 import com.channelfive.easyuni.security.jwt.AuthTokenFilter;
-import com.channelfive.easyuni.services.LoginService;
+import com.channelfive.easyuni.services.implementations.AccountDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -24,7 +24,7 @@ import com.channelfive.easyuni.services.LoginService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
-  LoginService loginService;
+  AccountDetailsServiceImpl accountDetailsServiceImpl;
 
   @Autowired
   private AuthEntryPointJwt unauthorizedHandler;
@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-    authenticationManagerBuilder.userDetailsService(loginService).passwordEncoder(passwordEncoder());
+    authenticationManagerBuilder.userDetailsService(accountDetailsServiceImpl).passwordEncoder(passwordEncoder());
   }
 
   @Bean
@@ -60,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .anyRequest().authenticated();
 
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+    //http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
   }
+
 }
 	

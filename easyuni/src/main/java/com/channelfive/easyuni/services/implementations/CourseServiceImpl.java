@@ -9,11 +9,11 @@ import com.channelfive.easyuni.services.CourseService;
 import com.channelfive.easyuni.services.repositories.CourseRepository;
 
 @Service
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl implements CourseService {
     
     private CourseRepository courseRepository;
     
-    public CourseServiceImpl(CourseRepository CourseRepo){
+    public CourseServiceImpl(CourseRepository CourseRepo) {
         this.courseRepository = CourseRepo;
     }
 
@@ -24,7 +24,7 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public List<Course> searchCourseByTitle(String query) {
-        List<Course> course = courseRepository.searchCourseByTitle(query);
+        List<Course> course = courseRepository.findByCourseNameLike(query);
         return course;
     }
 

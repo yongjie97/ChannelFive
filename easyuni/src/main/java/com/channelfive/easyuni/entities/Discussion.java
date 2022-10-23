@@ -7,6 +7,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Document(collection = "discussions")
 public class Discussion {
     
@@ -15,7 +17,8 @@ public class Discussion {
 
     private String title;
 
-    private String userId;
+    @DocumentReference
+    private Account author;
 
     private String message;
 
@@ -47,12 +50,12 @@ public class Discussion {
         this.title = title;
     }
 
-    public String getUserId() {
-        return userId;
+    public Account getAuthor() {
+        return author;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAuthor(Account author) {
+        this.author = author;
     }
 
     public List<DiscussionReply> getReplies() {

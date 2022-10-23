@@ -1,2 +1,10 @@
 easyuni/target/classes/application.properties
 easyuni/src/main/resources/application.properties
+.DS_Store
+easyuni/.DS_Store
+easyuni/src/.DS_Store
+easyuni/src/main/.DS_Store
+easyuni/src/main/java/.DS_Store
+easyuni/src/main/java/com/.DS_Store
+easyuni/src/main/java/com/channelfive/.DS_Store
+easyuni/src/main/java/com/channelfive/easyuni/.DS_Store

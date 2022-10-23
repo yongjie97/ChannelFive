@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "discussion_reply")
 public class DiscussionReply {
@@ -13,7 +16,8 @@ public class DiscussionReply {
 
     private String message;
 
-    private String userId;
+    @DocumentReference
+    private Account author;
 
     private String discussionId;
 
@@ -39,12 +43,12 @@ public class DiscussionReply {
         this.message = message;
     }
 
-    public String getUserId() {
-        return userId;
+    public Account getAuthor() {
+        return author;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setAuthor(Account author) {
+        this.author = author;
     }
 
     public String getDiscussionId() {

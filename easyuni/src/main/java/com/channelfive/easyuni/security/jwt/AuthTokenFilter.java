@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.channelfive.easyuni.services.LoginService;
+import com.channelfive.easyuni.services.implementations.AccountDetailsServiceImpl;
 
 public class AuthTokenFilter extends OncePerRequestFilter {
   
@@ -24,7 +24,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
   private JwtUtils jwtUtils;
 
   @Autowired
-  private LoginService loginService;
+  private AccountDetailsServiceImpl accountDetailsServiceImpl;
 
   private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -36,7 +36,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
       if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
         String email = jwtUtils.getEmailFromJwtToken(jwt);
 
-        UserDetails userDetails = loginService.loadUserByUsername(email);
+        UserDetails userDetails = accountDetailsServiceImpl.loadUserByUsername(email);
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
             userDetails.getAuthorities());
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
