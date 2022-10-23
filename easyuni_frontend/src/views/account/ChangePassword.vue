@@ -1,13 +1,13 @@
 <template>
-            <section class="vh-100" style="background-color: #E0E0E0;">
+            <section class="min-vh-100" style="background-color: #E0E0E0;">
             <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center h-100">
+            <div class="row d-flex justify-content-center vh-100">
                 <div class="col col-xl-7">
                 <div class="card">
                     <div class="row">
                     <div class="d-flex">
                         <div class="card-body p-4 p-lg-5 text-black">
-                        <form id="profileForm" @submit.prevent="submit">    
+                        <form id="passwordForm" @submit.prevent="submit">    
                             <h4 class="fw-normal mb-4 "><strong>Change Password</strong></h4>     
                             <p class="fw-normal mb-3 alert alert-success" v-if="successMessage">{{ successMessage }}</p>
                             <p class="fw-normal mb-3 alert alert-danger" v-if="failMessage">{{ failMessage }}</p>

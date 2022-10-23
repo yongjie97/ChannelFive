@@ -18,7 +18,7 @@
             <div class="row gx-5 gx-sm-3 gx-lg-5 gy-lg-5 gy-3 pb-5 projects">
                 <!-- Start Recent Work -->
                 <div class="col-xl-3 col-md-4 col-sm-6 project ui branding">
-                    <a href="/university/national-university-of-singapore" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <router-link to="/university/national-university-of-singapore" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                         <img class="service card-img" src="../assets/image/nus.png" alt="NUS">
                         <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                             <div class="service-work-content text-left text-light">
@@ -26,12 +26,12 @@
                                 <p class="card-text">National University of Singapore</p>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div><!-- End Recent Work -->
 
                 <!-- Start Recent Work -->
                 <div class="col-xl-3 col-md-4 col-sm-6 project ui graphic">
-                    <a href="/university/nanyang-technological-university" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <router-link to="/university/nanyang-technological-university" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                         <img class="card-img" src="../assets/image/ntu.jpeg" alt="NTU">
                         <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                             <div class="service-work-content text-left text-light">
@@ -39,12 +39,12 @@
                                 <p class="card-text">Nanyang Technological University</p>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div><!-- End Recent Work -->
 
                 <!-- Start Recent Work -->
                 <div class="col-xl-3 col-md-4 col-sm-6 project branding">
-                    <a href="/university/singapore-management-university" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
+                    <router-link to="/university/singapore-management-university" class="service-work card border-0 text-white shadow-sm overflow-hidden mx-5 m-sm-0">
                         <img class="card-img" src="../assets/image/smu.jpeg" alt="SMU">
                         <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                             <div class="service-work-content text-left text-light">
@@ -52,7 +52,7 @@
                                 <p class="card-text">Singapore Management University</p>
                             </div>
                         </div>
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </section>

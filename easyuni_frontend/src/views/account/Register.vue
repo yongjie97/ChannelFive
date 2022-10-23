@@ -1,6 +1,6 @@
 <template>
-    <section class="vh-110" style="background-color: #E0E0E0;">
-            <div class="container py-5 h-110">
+    <section class="min-vh-100" style="background-color: #E0E0E0;">
+            <div class="container py-5 h-100">
               <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
                   <div class="card">
@@ -46,8 +46,8 @@
                             <div class="pt-1 mb-4">
                               <input class="btn btn-warning text-white btn-lg btn-block" type="submit" value="Register"/>
                             </div>
-          
-                            <p class="mb-5 pb-lg-2 text-muted">Already have an account? <a href="/login" class="text-muted">Login</a></p>
+
+                            <p class="mb-5 pb-lg-2 text-muted">Already have an account? <router-link class="text-muted" to="/login">Login</router-link></p>
                           </form>
           
                         </div>

@@ -1,5 +1,5 @@
 <template>
-    <section class="vh-120" style="background-color: #E0E0E0;">
+    <section class="min-vh-100" style="background-color: #E0E0E0;">
         <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center h-100">
             <div class="col col-xl-7">
@@ -32,7 +32,7 @@
                                 <div class="form-label text-danger" v-if="v$.zipCode.$error">Please enter a valid zip code</div>
                             </div>
                         <div class="form-outline mb-4">
-                            <a class="text-dark" href="/profile/password">Change Password</a>
+                            <router-link class="text-dark" to="/profile/password">Change Password</router-link>
                         </div>
                         <div class="pt-3">
                             <input class="btn btn-warning text-white btn-lg btn-block" type="submit" value="Save Profile" />
@@ -81,7 +81,7 @@
         },
         mounted() {
             axios({method:'get', 
-                    url: "http://localhost:8080/profile/retrieve", 
+                    url: "http://localhost:8080/profile", 
                     withCredentials: true
             })
             .then(response => {

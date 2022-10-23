@@ -5,7 +5,13 @@ import ForgotPassword from '../views/account/ForgotPassword'
 import Register from '../views/account/Register'
 import Profile from '../views/account/Profile'
 import ChangePassword from '../views/account/ChangePassword'
+import AccountVerification from '../views/account/AccountVerification'
+import ResetPassword from '../views/account/ResetPassword'
 import University from '../views/University'
+import Discussion from '../views/discussion/Discussion'
+import DiscussionList from '../views/discussion/DiscussionList'
+import NewDiscussion from '../views/discussion/NewDiscussion'
+import ReplyDiscussion from '../views/discussion/ReplyDiscussion'
 import Error from '../views/404'
 
 const routes = [
@@ -17,6 +23,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
+    props: true,
     component: Login,
   },
   {
@@ -43,6 +50,36 @@ const routes = [
     path: '/university/:uniName',
     name: 'University',
     component: University,
+  },
+  {
+    path: '/register/verify/:email/:verification_code',
+    name: 'AccountVerification',
+    component: AccountVerification,
+  },
+  {
+    path: '/password/recovery/:verification_code',
+    name: 'ResetPassword',
+    component: ResetPassword,
+  },
+  {
+    path: '/discussion/:id',
+    name: 'Discussion',
+    component: Discussion
+  },
+  {
+    path: '/discussion/new',
+    name: 'NewDiscussion',
+    component: NewDiscussion
+  },
+  {
+    path: '/discussion/:id/reply',
+    name: 'ReplyDiscussion',
+    component: ReplyDiscussion
+  },
+  {
+    path: '/discussion',
+    name: 'DiscussionList',
+    component: DiscussionList
   },
   {
     path: '/:pathMatch(.*)*',

@@ -1,7 +1,7 @@
 <template>
-  <section class="vh-100" style="background-color: #E0E0E0;">
+  <section class="min-vh-100" style="background-color: #E0E0E0;">
     <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="row d-flex justify-content-center mt-5 vh-100">
         <div class="col col-xl-10">
         <div class="card">
             <div class="row g-0">

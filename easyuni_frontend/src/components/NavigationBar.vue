@@ -8,26 +8,26 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
+                <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between" id="navbar-toggler-success">
                     <div class="flex-fill mx-xl-5 mb-2">
                         <ul class="nav navbar-nav d-flex justify-content-end mx-xl-1 text-center text-dark">
                             <li class="nav-item">
-                                <a class="nav-link px-3" href="/">Home</a>
+                                <router-link class="nav-link px-3" to="/">Home</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link px-3" href="#">Course</a>
+                                <router-link class="nav-link px-3" to="#">Course</router-link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link px-3" href="work.html">Discussion</a>
+                                <router-link class="nav-link px-3" to="/discussion">Discussion</router-link>
                             </li>
                             <li class="nav-item" v-if="!loggedIn">
-                                <a class="nav-link px-3" href="/login">Log In</a>
+                                <router-link class="nav-link px-3" to="/login">Log In</router-link>
                             </li>
                             <li class="nav-item" v-if="loggedIn">
-                                <a class="nav-link px-3" href="/profile">Profile</a>
+                                <router-link class="nav-link px-3" to="/profile">Profile</router-link>
                             </li>
                             <li class="nav-item" v-if="loggedIn">
-                                <a class="nav-link px-3" @click="logOut()" href="http://localhost:3000">Log Out</a>
+                                <router-link class="nav-link px-3" to="#" @click="logOut()">Log Out</router-link>
                             </li>
                         </ul>
                     </div>
@@ -44,7 +44,7 @@
                 loggedIn: false
             }
         },
-        created() {
+        mounted() {
             if (this.$cookies.get('token')) {
                 this.loggedIn = true;
             }
@@ -52,6 +52,8 @@
         methods: {
             logOut() {
                 this.$cookies.remove('token');
+                this.loggedIn = false;
+                this.$router.push('/')
             },
         }
     }

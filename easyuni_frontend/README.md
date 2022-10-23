@@ -1,4 +1,4 @@
-# EasyUni - Frontend
+# test-project
 
 ## Project setup
 ```

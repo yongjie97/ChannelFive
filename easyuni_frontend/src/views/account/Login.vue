@@ -1,5 +1,5 @@
 <template>
-    <section class="vh-120" style="background-color: #E0E0E0;">
+    <section class="min-vh-100" style="background-color: #E0E0E0;">
             <div class="container py-2 h-100">
             <div class="row d-flex justify-content-center align-items-center vh-100">
                 <div class="col col-xl-10">
@@ -34,8 +34,9 @@
                                 <input class="btn btn-warning btn-lg btn-block text-white" type="submit" value="Login"/>
                             </div>
         
-                            <a class="small text-muted" href="/forgot_password">Forgot password?</a>
-                            <p class="mb-5 pb-lg-2 text-dark">Don't have an account? <a class="text-dark" href="/register">Register here</a></p>
+                            <router-link class="small text-muted" to="/forgot_password">Forgot password?</router-link>
+                            <p class="mb-5 pb-lg-2 text-dark">Don't have an account? 
+                                <router-link class="text-dark" to="/register">Register here</router-link></p>
                         </form>
         
                         </div>
@@ -75,6 +76,12 @@
                 required
             }
         },
+        beforeMount() {
+            if (this.$route.query.message)
+                this.successMessage = this.$route.query.message
+            if (this.$cookies.get('token'))
+                this.$router.push("/")
+        },
         methods: {
             submit: function(e) {
                 this.v$.$validate()
@@ -88,12 +95,12 @@
                         headers: {"Content-Type":"multipart/form-data"},
                         withCredentials: true
                     }).then((res) => {
-                        //this.$router.push({ name: "Home"})
-                        if (res.data.success)
-                            window.location.href = "http://localhost:3000"
+                        if (res.data.success) {
+                            this.$router.go(0)
+                        }
                         else {
-                            this.successMessage = res.data.message
-                            this.failMessage = null;
+                            this.successMessage = null;
+                            this.failMessage = res.data.message;
                         }
                     }).catch((error) => {
                         this.failMessage = "Opps! Something went wrong. Please try again later."
