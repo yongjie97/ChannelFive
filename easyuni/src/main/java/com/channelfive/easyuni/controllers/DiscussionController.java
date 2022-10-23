@@ -22,7 +22,7 @@ import com.channelfive.easyuni.services.DiscussionService;
 import com.channelfive.easyuni.validations.DiscussionForm;
 import com.channelfive.easyuni.validations.DiscussionReplyForm;
 
-@CrossOrigin(origins = "http://localhost:8083", allowCredentials="true", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:8081", allowCredentials="true", maxAge = 3600)
 @Controller
 public class DiscussionController {
 

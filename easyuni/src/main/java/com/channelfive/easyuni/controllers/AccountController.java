@@ -39,7 +39,7 @@ import com.channelfive.easyuni.validations.RegisterForm;
 import com.channelfive.easyuni.validations.ResetPasswordForm;
 import com.channelfive.easyuni.validations.AccountRecoveryForm;
 
-@CrossOrigin(origins = "http://localhost:8083", allowCredentials="true", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:8081", allowCredentials="true", maxAge = 3600)
 @RestController
 public class AccountController {
 
