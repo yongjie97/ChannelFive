@@ -11,7 +11,7 @@ public class CourseIGP {
 
     private int year;
 
-    private Course course;
+    private String courseId;
 
     private String IGP10th;
 
@@ -23,14 +23,6 @@ public class CourseIGP {
 
     public void setyear(int year) {
         this.year = year;
-    }
-
-    public Course getcourse() {
-        return course;
-    }
-
-    public void setcourse(Course course) {
-        this.course = course;
     }
 
     public String getId() {
@@ -55,6 +47,14 @@ public class CourseIGP {
 
     public void setIGP90th(String iGP90th) {
         IGP90th = iGP90th;
+    }
+
+    public String getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     

@@ -18,6 +18,7 @@ import com.channelfive.easyuni.entities.University;
 import com.channelfive.easyuni.services.repositories.CourseRepository;
 import com.channelfive.easyuni.services.repositories.SchoolRepository;
 import com.channelfive.easyuni.services.repositories.UniversityRepository;
+import com.channelfive.easyuni.services.repositories.CourseIGPRepository;
 
 @SpringBootApplication
 public class EasyuniApplication {
@@ -31,6 +32,8 @@ public class EasyuniApplication {
 	@Autowired
 	private CourseRepository courseRepository;
 
+	@Autowired
+	private CourseIGPRepository courseIGPRepository;
 	public static void main(String[] args) {
 		SpringApplication.run(EasyuniApplication.class, args);
 	}
@@ -41,7 +44,7 @@ public class EasyuniApplication {
 
 			if (universityRepository.count() > 0 && 
 			schoolRepository.count() > 0 &&
-			courseRepository.count() > 0)
+			courseRepository.count() > 0 && courseIGPRepository.count() > 0)
 				return;
 
 			// Start of Universities
@@ -309,35 +312,44 @@ public class EasyuniApplication {
 			CourseIGP nus_cs_2019 = new CourseIGP();
 			nus_cs_2019.setIGP10th("AAA/A");
 			nus_cs_2019.setIGP90th("AAA/A");
-			nus_cs_2019.setcourse(nus_cs);
+			nus_cs_2019.setyear(2019);
+			nus_cs_2019.setCourseId(nus_cs.getId());
 			nus_cs_igp.add(nus_cs_2019);
 
 			CourseIGP nus_cs_2020 = new CourseIGP();
 			nus_cs_2020.setIGP10th("AAA/A");
 			nus_cs_2020.setIGP90th("AAA/A");
-			nus_cs_2020.setcourse(nus_cs);
+			nus_cs_2019.setyear(2020);
+			nus_cs_2020.setCourseId(nus_cs.getId());
 			nus_cs_igp.add(nus_cs_2020);
 			
 			CourseIGP nus_cs_2021 = new CourseIGP();
 			nus_cs_2021.setIGP10th("AAA/A");
 			nus_cs_2021.setIGP90th("AAA/A");
-			nus_cs_2021.setcourse(nus_cs);
+			nus_cs_2019.setyear(2021);
+			nus_cs_2021.setCourseId(nus_cs.getId());
 			nus_cs_igp.add(nus_cs_2021);
 
 			List<CourseIGP> nus_biz_igp = new ArrayList<CourseIGP>();
 			CourseIGP nus_bizAd_2019 = new CourseIGP();
 			nus_bizAd_2019.setIGP90th("AAA/A");
 			nus_bizAd_2019.setIGP10th("AAB/C");
+			nus_bizAd_2019.setyear(2019);
+			nus_bizAd_2019.setCourseId(nus_bizAd.getId());
 			nus_biz_igp.add(nus_bizAd_2019);
 
 			CourseIGP nus_bizAd_2020 = new CourseIGP();
 			nus_bizAd_2020.setIGP90th("AAA/A");
 			nus_bizAd_2020.setIGP10th("AAB/C");
+			nus_bizAd_2020.setyear(2020);
+			nus_bizAd_2020.setCourseId(nus_bizAd.getId());
 			nus_biz_igp.add(nus_bizAd_2020);
 
 			CourseIGP nus_bizAd_2021 = new CourseIGP();
 			nus_bizAd_2021.setIGP90th("AAA/A");
 			nus_bizAd_2021.setIGP10th("ABB/C");
+			nus_bizAd_2021.setyear(2021);
+			nus_bizAd_2021.setCourseId(nus_bizAd.getId());
 			nus_biz_igp.add(nus_bizAd_2021);
 			//End of NUS courses IGP
 
@@ -346,32 +358,44 @@ public class EasyuniApplication {
 			CourseIGP ntu_cs_2019 = new CourseIGP();
 			ntu_cs_2019.setIGP90th("AAA/A");
 			ntu_cs_2019.setIGP10th("AAC/C");
+			ntu_cs_2019.setyear(2019);
+			ntu_cs_2019.setCourseId(ntu_cs.getId());
 			ntu_cs_igp.add(ntu_cs_2019);
 
 			CourseIGP ntu_cs_2020 = new CourseIGP();
 			ntu_cs_2020.setIGP90th("AAA/A");
 			ntu_cs_2020.setIGP10th("AAA/B");
+			ntu_cs_2020.setyear(2020);
+			ntu_cs_2020.setCourseId(ntu_cs.getId());
 			ntu_cs_igp.add(ntu_cs_2020);
 
 			CourseIGP ntu_cs_2021 = new CourseIGP();
 			ntu_cs_2021.setIGP90th("AAA/A");
 			ntu_cs_2021.setIGP10th("AAA/B");
+			ntu_cs_2021.setyear(2021);
+			ntu_cs_2021.setCourseId(ntu_cs.getId());
 			ntu_cs_igp.add(ntu_cs_2021);
 
 			List<CourseIGP> ntu_coh_igp = new ArrayList<CourseIGP>();
 			CourseIGP ntu_soci_2019 = new CourseIGP();
 			ntu_soci_2019.setIGP90th("AAA/A");
 			ntu_soci_2019.setIGP10th("BBC/C");
+			ntu_soci_2019.setyear(2019);
+			ntu_soci_2019.setCourseId(ntu_soci.getId());
 			ntu_coh_igp.add(ntu_soci_2019);
 
 			CourseIGP ntu_soci_2020 = new CourseIGP();
 			ntu_soci_2020.setIGP90th("AAA/A");
 			ntu_soci_2020.setIGP10th("BBC/C");
+			ntu_soci_2020.setyear(2020);
+			ntu_soci_2020.setCourseId(ntu_soci.getId());
 			ntu_coh_igp.add(ntu_soci_2020);
 
 			CourseIGP ntu_soci_2021 = new CourseIGP();
 			ntu_soci_2021.setIGP90th("AAA/A");
 			ntu_soci_2021.setIGP10th("ABC/C");
+			ntu_soci_2021.setyear(2021);
+			ntu_soci_2021.setCourseId(ntu_soci.getId());
 			ntu_coh_igp.add(ntu_soci_2021);
 			//End of NTU Course IGP 
 
@@ -380,36 +404,75 @@ public class EasyuniApplication {
 			CourseIGP smu_soa_2019 = new CourseIGP();
 			smu_soa_2019.setIGP90th("AAA/A");
 			smu_soa_2019.setIGP10th("ABB/C");
+			smu_soa_2019.setyear(2019);
+			smu_soa_2019.setCourseId(smu_account.getId());
 			smu_soa_igp.add(smu_soa_2019);
 
 			CourseIGP smu_soa_2020 = new CourseIGP();
 			smu_soa_2020.setIGP90th("AAA/A");
 			smu_soa_2020.setIGP10th("BBC/C");
+			smu_soa_2020.setyear(2020);
+			smu_soa_2020.setCourseId(smu_account.getId());
 			smu_soa_igp.add(smu_soa_2020);
 
 			CourseIGP smu_soa_2021 = new CourseIGP();
 			smu_soa_2021.setIGP90th("AAA/A");
 			smu_soa_2021.setIGP10th("BBC/C");
+			smu_soa_2021.setyear(2021);
+			smu_soa_2021.setCourseId(smu_account.getId());
 			smu_soa_igp.add(smu_soa_2021);
 
 			List<CourseIGP> smu_sob_igp = new ArrayList<CourseIGP>();
 			CourseIGP smu_bizm_2019 = new CourseIGP();
 			smu_bizm_2019.setIGP90th("AAA/A");
 			smu_bizm_2019.setIGP10th("ABB/C");
+			smu_bizm_2019.setyear(2019);
+			smu_bizm_2019.setCourseId(smu_bizMan.getId());
 			smu_sob_igp.add(smu_bizm_2019);
 
 			CourseIGP smu_bizm_2020 = new CourseIGP();
 			smu_bizm_2020.setIGP90th("AAA/A");
 			smu_bizm_2020.setIGP10th("BBB/C");
+			smu_bizm_2020.setyear(2020);
+			smu_bizm_2020.setCourseId(smu_bizMan.getId());
 			smu_sob_igp.add(smu_bizm_2020);
 
 			CourseIGP smu_bizm_2021 = new CourseIGP();
 			smu_bizm_2021.setIGP90th("AAA/A");
 			smu_bizm_2021.setIGP10th("BBB/B");
+			smu_bizm_2021.setyear(2021);
+			smu_bizm_2021.setCourseId(smu_bizMan.getId());
 			smu_sob_igp.add(smu_bizm_2021);
 			//End of SMU courses IGP
 
 			//Start of Saving course IGP and updating Courses
+			//Start of NUS Saving 
+			nus_cs.setCourseIGP(nus_cs_igp);
+			nus_bizAd.setCourseIGP(nus_biz_igp);
+			courseIGPRepository.saveAll(nus_cs_igp);
+			courseIGPRepository.saveAll(nus_biz_igp);
+			courseRepository.save(nus_cs);
+			courseRepository.save(nus_bizAd);
+
+			//End of NUS Saving
+
+			//Start of NTU Saving
+			ntu_cs.setCourseIGP(ntu_cs_igp);
+			ntu_soci.setCourseIGP(ntu_coh_igp);
+			courseIGPRepository.saveAll(ntu_cs_igp);
+			courseIGPRepository.saveAll(ntu_coh_igp);
+			courseRepository.save(ntu_cs);
+			courseRepository.save(ntu_soci);
+			//End of NTU Saving
+
+			//Start of SMU Saving
+			smu_account.setCourseIGP(smu_soa_igp);
+			smu_bizMan.setCourseIGP(smu_sob_igp);
+			courseIGPRepository.saveAll(smu_soa_igp);
+			courseIGPRepository.saveAll(smu_sob_igp);
+			courseRepository.save(smu_account);
+			courseRepository.save(smu_bizMan);
+			//End of SMU Saving
 
 
 		};
