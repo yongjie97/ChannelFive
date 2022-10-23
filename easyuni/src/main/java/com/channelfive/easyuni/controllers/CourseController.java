@@ -4,30 +4,33 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.channelfive.easyuni.entities.Course;
+import com.channelfive.easyuni.payload.JSONResponseBuilder;
 import com.channelfive.easyuni.services.CourseService;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:8081", allowCredentials="true", maxAge = 3600)
+@RestController
 public class CourseController {
     
     @Autowired
-    private CourseService courseService;
+    CourseService courseService;
 
     //search by title
-    @GetMapping("/search")
-    public ResponseEntity<List<Course>> searchCourseByTitle(@RequestParam("query") String query){
+    @GetMapping("/course/search")
+    public ResponseEntity<?> searchCourseByTitle(@RequestParam("query") String query){
         /*try {
             courseService.searchCourseByTitle(query);
         } catch (CourseNotFoundException e) {
             return ResponseEntity.ok().body("Sorry! Course does not exist.");
         }*/
-        return ResponseEntity.ok(courseService.searchCourseByTitle(query));
+        return ResponseEntity.ok(JSONResponseBuilder.build(true, null, courseService.searchCourseByTitle(query)));
     }
 
     //search sorted by salary

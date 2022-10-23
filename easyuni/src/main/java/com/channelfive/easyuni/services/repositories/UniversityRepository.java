@@ -9,5 +9,5 @@ import com.channelfive.easyuni.entities.University;
 
 @Repository
 public interface UniversityRepository extends MongoRepository<University, Long> {
-    Optional<University> findByName(String name);
+    Optional<University> findByNameIgnoreCase(String name);
 }

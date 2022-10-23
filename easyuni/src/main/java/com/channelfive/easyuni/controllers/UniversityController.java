@@ -2,35 +2,32 @@ package com.channelfive.easyuni.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.channelfive.easyuni.entities.University;
 import com.channelfive.easyuni.exceptions.UniversityNotFoundException;
-import com.channelfive.easyuni.payload.JSONReponseBuilder;
+import com.channelfive.easyuni.payload.JSONResponseBuilder;
 import com.channelfive.easyuni.services.UniversityService;
 
-@Controller
+@CrossOrigin(origins = "http://localhost:8081", allowCredentials="true", maxAge = 3600)
+@RestController
 public class UniversityController {
 
     @Autowired
-    private UniversityService universityService;
+    UniversityService universityService;
 
-    @GetMapping("/university")
-    public String index() {
-        return "university/university.html";
-    }
-
-    @GetMapping("/api/university/{uni_name}")
-    public ResponseEntity<?> universityInfo(@PathVariable String uni_name) {
-        String query = uni_name.replace("-", " ");
+    @GetMapping("/university/{uniName}")
+    public ResponseEntity<?> index(@PathVariable String uniName) {
+        String query = uniName.replace("-", " ");
         try {
             University university = universityService.getUniversityInfo(query);
-            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, null, university));
+            return ResponseEntity.ok().body(JSONResponseBuilder.build(true, null, university));
         } catch (UniversityNotFoundException e) {
-            return ResponseEntity.ok().body(JSONReponseBuilder.build(true, e.getMessage(), null));
-        }
+            return ResponseEntity.ok().body(JSONResponseBuilder.build(false, e.getMessage(), query));
+        } 
     }
     
 }

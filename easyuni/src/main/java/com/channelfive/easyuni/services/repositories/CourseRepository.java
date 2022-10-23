@@ -11,8 +11,7 @@ import com.channelfive.easyuni.entities.Course;
 @Repository
 public interface CourseRepository extends MongoRepository<Course, Long> {
     
-    @Query("{course_title:?0}") //search by title
-    List<Course> searchCourseByTitle(String query);
+    List<Course> findByCourseNameLike(String query);
 
     @Query(value = "{course_title:?0}",  sort= "{salary:1}") //sort by salary
     List<Course> searchCourseSortedBySalary(String query);

@@ -20,7 +20,9 @@ private static final long serialVersionUID = 1L;
 
   private String email;
 
-  private String address;
+  private String displayName;
+
+  private String zipCode;
 
   @JsonIgnore
   private String password;
@@ -29,14 +31,18 @@ private static final long serialVersionUID = 1L;
 
   private Collection<? extends GrantedAuthority> authorities;
 
-  public AccountDetailsImpl(String id, String address, String email, String password, 
-        LocalDateTime accountDate, Collection<? extends GrantedAuthority> authorities) {
+  private Boolean verified;
+
+  public AccountDetailsImpl(String id, String zipCode, String email, String displayName, String password, 
+        LocalDateTime accountDate, Collection<? extends GrantedAuthority> authorities, Boolean verified) {
     this.id = id;
-    this.address = address;
+    this.zipCode = zipCode;
     this.email = email;
+    this.displayName = displayName;
     this.password = password;
     this.accountDate = accountDate;
     this.authorities = authorities;
+    this.verified = verified;
   }
 
   public static AccountDetailsImpl build(Account account) {
@@ -46,11 +52,13 @@ private static final long serialVersionUID = 1L;
 
     return new AccountDetailsImpl(
         account.getId(), 
-        account.getAddress(), 
+        account.getZipCode(), 
         account.getEmail(),
+        account.getDisplayName(),
         account.getPassword(), 
         account.getAccountDate(),
-        authorities);
+        authorities,
+        account.getVerficationCode() == null || account.getVerficationCode().isEmpty());
   }
 
   @Override
@@ -66,6 +74,10 @@ private static final long serialVersionUID = 1L;
     return email;
   }
 
+  public String getDisplayName() {
+    return displayName;
+  }
+
   @Override
   public String getPassword() {
     return password;
@@ -76,12 +88,16 @@ private static final long serialVersionUID = 1L;
     return email;
   }
 
-  public String getAddress() {
-    return address;
+  public String getZipCode() {
+    return zipCode;
   }
 
   public LocalDateTime getAccountDate() {
     return accountDate;
+  }
+
+  public boolean isVerified() {
+    return verified;
   }
 
   @Override

@@ -11,6 +11,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.channelfive.easyuni.constants.AccountRoleConstant;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Document(collection = "accounts")
 public class Account {
@@ -18,6 +19,7 @@ public class Account {
     @Id
     private String id;
 
+    @JsonIgnore
     private Set<AccountRoleConstant> roles = new HashSet<>();
 
     @Email
@@ -25,14 +27,19 @@ public class Account {
     private String email;
 
     @NotBlank
+    @JsonIgnore
     private String password;
 
-    private String address;
+    private String zipCode;
 
+    private String displayName;
+
+    @JsonIgnore
     private String verficationCode;
 
     private LocalDateTime accountDate;
 
+    @JsonIgnore
     private String resetPasswordCode;
 
     public Account() {
@@ -71,12 +78,12 @@ public class Account {
         this.password = password;
     }
 
-    public String getAddress() {
-        return address;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 
     public String getVerficationCode() {
@@ -101,6 +108,14 @@ public class Account {
 
     public void setResetPasswordCode(String resetPasswordCode) {
         this.resetPasswordCode = resetPasswordCode;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
 }

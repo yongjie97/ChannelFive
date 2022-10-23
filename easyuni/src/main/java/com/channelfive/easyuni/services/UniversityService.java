@@ -1,7 +1,5 @@
 package com.channelfive.easyuni.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ public class UniversityService {
     private UniversityRepository universityRepository;
 
     public University getUniversityInfo(String name) throws UniversityNotFoundException {
-        University university = universityRepository.findByName(name)
+        University university = universityRepository.findByNameIgnoreCase(name)
             .orElseThrow(() -> new UniversityNotFoundException(ExceptionMessages.UNI_NF_MSG));
         return university;
     }
