@@ -1,8 +1,8 @@
 <template>
-    <div class="card mb-3">
-      <div class="card-body py-3 px-4">
+    <div class="card pt-4" :class="{ 'bg-custom': index%2==1 }">
+      <div class="card-body pb-0 px-4">
         <p class="small mb-2 text-muted">{{ displayName }}<span class="mx-2">|</span>{{ date }}</p>
-        <p class="mb-1" v-html="message"></p>
+        <p class="pb-2" v-html="message"></p>
       </div>
     </div>
   </template>
@@ -18,6 +18,8 @@
       message: String,
       displayName: String,
       date: String,
+      index: Number,
+      size: Number
     },
     computed: {
       date() {
@@ -42,6 +44,10 @@
   
   .card {
     border-radius: 0;
+  }
+
+  .bg-custom {
+    background-color: #f0f0f0
   }
 
   </style>

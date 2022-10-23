@@ -64,22 +64,6 @@
               required
             }
         },
-        mounted() {
-            axios({method:'get', 
-                    url: "http://localhost:8080/profile/retrieve", 
-                    withCredentials: true
-            })
-            .then(response => {
-                if (response != null) {
-                    this.email = response.data.data.email
-                    this.displayName = response.data.data.displayName
-                    this.zipCode = response.data.data.zipCode
-                }
-            }).catch((error) => {
-                this.failMessage = "Opps! Something went wrong. Please try again later."
-                this.successMessage = null
-            })
-        },
         methods: {
             submit: function(e) {
                 this.v$.$validate()
