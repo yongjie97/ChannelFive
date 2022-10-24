@@ -15,9 +15,8 @@
                                 <p style="white-space: pre-line" class="fw-normal mb-3 alert alert-danger"
                                     v-if="failMessage">{{ failMessage }}</p>
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="message">Discussion Message</label>
                                     <VueQuill v-model:content="message" />
-                                    <div class="form-label text-danger" v-if="v$.message.$error">Please enter a message
+                                    <div class="form-label text-danger" v-if="v$.message.$error">Please enter something
                                     </div>
                                 </div>
                                 <div class="pt-1 mb-4">

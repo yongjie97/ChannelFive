@@ -1,8 +1,8 @@
 <template>
-    <div class="card pt-4" :class="{ 'bg-custom': index%2==1 }">
+    <div class="card p-3" :class="{ 'bg-custom': index%2==1 }">
       <div class="card-body pb-0 px-4">
-        <p class="small mb-2 text-muted">{{ displayName }}<span class="mx-2">|</span>{{ date }}</p>
-        <p class="pb-2" v-html="message"></p>
+        <p class="small mb-3 text-muted">{{ displayName }}<span class="mx-2">|</span>{{ date }}</p>
+        <p v-html="message"></p>
       </div>
     </div>
   </template>
@@ -47,7 +47,8 @@
   }
 
   .bg-custom {
-    background-color: #f0f0f0
+    border: 1px;
+    background-color: #f8f8f8;
   }
 
   </style>

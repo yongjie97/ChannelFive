@@ -20,7 +20,7 @@
                                                 name="newPassword" class="form-control form-control-lg"
                                                 :class="{ 'border-danger': v$.newPassword.$error }" />
                                             <div class="form-label text-danger" v-if="v$.newPassword.$error">Please
-                                                enter a new password</div>
+                                                enter your new password</div>
                                         </div>
 
                                         <div class="pt-3">
@@ -86,14 +86,15 @@ export default {
                     data: resetPasswordForm,
                     headers: { "Content-Type": "multipart/form-data" },
                     withCredentials: true
-                }).then((res) => {
-                    if (res.data.success) {
+                }).then((response) => {
+                    if (response.data.success) {
                         this.$router.push({ name: 'Login', query: { message: response.data.message } })
                     } else {
-                        this.failMessage = res.data.message
+                        this.failMessage = response.data.message
                         this.successMessage = null
                     }
                 }).catch((error) => {
+                    console.log(error.message)
                     this.failMessage = "Opps! Something went wrong. Please try again later."
                     this.successMessage = null
                 })
