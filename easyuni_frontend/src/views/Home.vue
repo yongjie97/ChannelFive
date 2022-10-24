@@ -1,17 +1,17 @@
 <template>
   <CarouselSlide />
-  <Search />
+  <UniversityItem />
 </template>
   
   <script>
   import CarouselSlide from '../components/CarouselSlide.vue'
-  import Search from '../components/Search.vue'
+  import UniversityItem from '../components/UniversityItem.vue'
   
   export default {
     name: 'Home',
     components: {
       CarouselSlide,
-      Search
+      UniversityItem
     }
   }
   </script>

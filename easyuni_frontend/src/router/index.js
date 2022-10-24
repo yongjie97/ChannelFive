@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import Login from '../views/account/Login'
+import Course from '../views/Course'
+import Search from '../views/Search'
 import ForgotPassword from '../views/account/ForgotPassword'
 import Register from '../views/account/Register'
 import Profile from '../views/account/Profile'
@@ -23,8 +25,17 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    props: true,
     component: Login,
+  },
+  {
+    path: '/course',
+    name: 'Course',
+    component: Course,
+  },
+  {
+    path: '/search/:query',
+    name: 'Search',
+    component: Search,
   },
   {
     path: '/forgot_password',
