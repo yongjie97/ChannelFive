@@ -2,7 +2,7 @@
     <section class="service-wrapper py-2" id="course">
         <div class="container-fluid">
             <div class="row">
-                <h2 class="h2 text-center col-12 py-5 semi-bold-600">Courses by University</h2>
+                <h2 class="h2 text-center col-12 py-5 semi-bold-600">{{ title }}</h2>
             </div>
         </div>
     </section>
@@ -64,11 +64,14 @@
 
 <script>
 export default {
-    name: 'UniversityItem',
+    name: 'CourseSelection',
     data() {
         return {
             search: ''
         }
+    },
+    props: {
+        title: String
     },
     methods: {
         submit: function () {

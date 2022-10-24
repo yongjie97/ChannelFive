@@ -51,7 +51,6 @@ export default {
         }
     },
     mounted() {
-
         if (this.$route.params.query)
             this.query = this.$route.params.query
         axios({

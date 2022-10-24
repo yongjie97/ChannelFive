@@ -1,17 +1,17 @@
 <template>
   <CarouselSlide />
-  <UniversityItem />
+  <CourseSelection :title="'Courses by University'" />
 </template>
   
   <script>
   import CarouselSlide from '../components/CarouselSlide.vue'
-  import UniversityItem from '../components/UniversityItem.vue'
+  import CourseSelection from '../components/CourseSelection.vue'
   
   export default {
     name: 'Home',
     components: {
       CarouselSlide,
-      UniversityItem
+      CourseSelection
     }
   }
   </script>
