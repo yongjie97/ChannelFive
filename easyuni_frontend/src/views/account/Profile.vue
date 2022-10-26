@@ -25,12 +25,7 @@
                                 <input type="text" id="displayName" v-model="displayName" name="displayName" class="form-control form-control-lg" :class="{ 'border-danger': v$.displayName.$error }" />
                                 <div class="form-label text-danger" v-if="v$.displayName.$error">Please enter a display name</div>
                             </div>
-    
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="zipCode">Zip Code</label>
-                                <input type="text" id="zipCode" v-model="zipCode" name="zipCode" class="form-control form-control-lg" :class="{ 'border-danger': v$.zipCode.$error }" />
-                                <div class="form-label text-danger" v-if="v$.zipCode.$error">Please enter a valid zip code</div>
-                            </div>
+
                         <div class="form-outline mb-4">
                             <router-link class="text-dark" to="/profile/password">Change Password</router-link>
                         </div>
@@ -52,7 +47,7 @@
 <script>
 
     import { useVuelidate } from '@vuelidate/core'
-    import { required, minLength, maxLength, numeric } from '@vuelidate/validators'
+    import { required } from '@vuelidate/validators'
 
     export default {
         name: 'Profile',
@@ -63,7 +58,6 @@
             return {
                 email: '',
                 displayName: '',
-                zipCode: '',
                 successMessage: null,
                 failMessage: null,
             }
@@ -72,12 +66,6 @@
             displayName: {
               required
             },
-            zipCode: {
-              required,
-              numeric,
-              minLength: minLength(6),
-              maxLength: maxLength(6)
-            }
         },
         mounted() {
             axios({method:'get', 
@@ -88,7 +76,6 @@
                 if (response != null) {
                     this.email = response.data.data.email
                     this.displayName = response.data.data.displayName
-                    this.zipCode = response.data.data.zipCode
                 }
             }).catch((error) => {
                 this.failMessage = "Opps! Something went wrong. Please try again later."
@@ -101,7 +88,6 @@
                 if (!this.v$.$error) {
                     var profileForm = new FormData();
                     profileForm.append('displayName', this.displayName);
-                    profileForm.append('zipCode', this.zipCode);
                     axios({ method:'post', 
                         url: "http://localhost:8080/profile/update", 
                         data: profileForm, 

@@ -36,12 +36,6 @@
                                 <input type="text" id="displayName" v-model="displayName" name="displayName" class="form-control form-control-lg" :class="{ 'border-danger': v$.displayName.$error }" />
                                 <div class="form-label text-danger" v-if="v$.displayName.$error">Please enter a display name</div>
                             </div>
-    
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="zipCode">Zip Code*</label>
-                                <input type="text" id="zipCode" v-model="zipCode" name="zipCode" class="form-control form-control-lg" :class="{ 'border-danger': v$.zipCode.$error }" />
-                                <div class="form-label text-danger" v-if="v$.zipCode.$error">Please enter a valid zip code</div>
-                            </div>
           
                             <div class="pt-1 mb-4">
                               <input class="btn btn-warning text-white btn-lg btn-block" type="submit" value="Register"/>
@@ -63,7 +57,7 @@
 <script>    
 
     import { useVuelidate } from '@vuelidate/core'
-    import { required, email, minLength, maxLength, numeric } from '@vuelidate/validators'
+    import { required, email } from '@vuelidate/validators'
 
     export default {
         name: 'Register',
@@ -75,7 +69,6 @@
                 email: null,
                 password: null,
                 displayName: null,
-                zipCode: null,
                 successMessage: null,
                 failMessage: null,
             }
@@ -91,12 +84,6 @@
             displayName: {
               required
             },
-            zipCode: {
-              required,
-              numeric,
-              minLength: minLength(6),
-              maxLength: maxLength(6)
-            }
         },
         methods: {
             submit: function(e) {
@@ -106,7 +93,6 @@
                     registerForm.append('email', this.email);
                     registerForm.append('password', this.password);
                     registerForm.append('displayName', this.displayName);
-                    registerForm.append('zipCode', this.zipCode);
                     axios({ method:'post', 
                         url: "http://localhost:8080/register", 
                         data: registerForm, 

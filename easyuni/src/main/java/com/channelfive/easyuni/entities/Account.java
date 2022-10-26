@@ -30,8 +30,6 @@ public class Account {
     @JsonIgnore
     private String password;
 
-    private String zipCode;
-
     private String displayName;
 
     @JsonIgnore
@@ -76,14 +74,6 @@ public class Account {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
     }
 
     public String getVerficationCode() {

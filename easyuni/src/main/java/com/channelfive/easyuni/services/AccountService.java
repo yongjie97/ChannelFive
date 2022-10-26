@@ -83,7 +83,6 @@ public class AccountService {
         Account account = accountRepository.findByEmail(email)
         .orElseThrow(() -> new AccountNotFoundException(ExceptionMessages.ACC_NF_MSG));
         account.setDisplayName(profileForm.getDisplayName());
-        account.setZipCode(profileForm.getZipCode());
         accountRepository.save(account);
     }
 
