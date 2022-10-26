@@ -61,7 +61,7 @@ export default {
     },
     mounted() {
         if (!this.$cookies.get('token')) {
-            this.$router.push('/login')
+            this.$router.push({ name: 'Login', query: { ref: 'replydiscussion_' +  this.$route.params.id} })
         }
         axios({
             method: 'get',

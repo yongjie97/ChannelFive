@@ -9,6 +9,14 @@
         </div>
         <div class="container py-5">
             <div class="row d-flex justify-content-center">
+                <div class="col col-xl-10 mb-5">
+                    <div class="input-group">
+                        <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3" 
+                            placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
+                        <button @click.prevent="submit()" type="button"
+                            class="btn btn-warning text-white">Search</button>
+                    </div>
+                </div>
                 <div class="col col-xl-10">
                     <CourseItem v-for="(data, index) in uniData" :courseName=data.degree :schoolName=data.school />
                 </div>
@@ -29,28 +37,51 @@ export default {
     data() {
         return {
             uniName: '',
-            uniData: []
+            uniData: [],
         }
     },
     mounted() {
         this.uniName = this.$route.params.uniName.replaceAll('-', ' ');
         axios({
             method: 'get',
-            url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=500'
+            url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&limit=847'
         })
             .then(response => {
                 if (response != null) {
                     response.data.result.records.forEach(element => {
+                        if (element.year === "2019")
                         if (element.university.toUpperCase() === this.$route.params.uniName.replaceAll('-', ' ').toUpperCase())
                             if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
                                 && !element.degree.includes("Cum Laude"))
                                 this.uniData.push(element);
                     });
-
                 }
             }).catch((error) => {
                 alert(error.message)
             })
+    },
+    methods: {
+        submit: function () {
+            this.$router.push("/search/" + this.query)
+            axios({
+                method: 'get',
+                url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=100'
+            })
+                .then(response => {
+                    if (response != null) {
+                        this.uniData = [];
+                        response.data.result.records.forEach(element => {
+                            if (element.university !== "Singapore Institute of Technology")
+                                if (element.degree.toUpperCase().includes(this.query.toUpperCase()))
+                                    if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
+                                        && !element.degree.includes("Cum Laude"))
+                                        this.uniData.push(element);
+                        });
+                    }
+                }).catch((error) => {
+                    alert(error.message)
+                })
+        }
     },
 }
 </script>

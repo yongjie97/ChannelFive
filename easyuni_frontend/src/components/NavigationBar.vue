@@ -10,10 +10,10 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="align-self-center collapse navbar-collapse flex-fill d-lg-flex justify-content-lg-between"
+            <div class="collapse navbar-collapse justify-content-md-between"
                 id="navbar-toggler-success">
-                <div class="flex-fill mx-xl-5 mb-2">
-                    <ul class="nav navbar-nav d-flex justify-content-end mx-xl-1 text-center text-dark">
+                <div class="mb-2 flex-fill justify-content-end">
+                    <ul class="nav navbar-nav d-flex justify-content-end text-center text-dark">
                         <li class="nav-item">
                             <router-link class="nav-link px-3" to="/">Home</router-link>
                         </li>
@@ -40,7 +40,11 @@
 </template>
 
 <script>
+
+import bs from "../assets/js/bootstrap.bundle.min.js"
+
 export default {
+    
     name: 'NavigationBar',
     data() {
         return {

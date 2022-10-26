@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home'
 import Login from '../views/account/Login'
 import Course from '../views/Course'
+import CourseDetails from '../views/CourseDetails'
 import Search from '../views/Search'
 import ForgotPassword from '../views/account/ForgotPassword'
 import Register from '../views/account/Register'
@@ -91,6 +92,11 @@ const routes = [
     path: '/discussion',
     name: 'DiscussionList',
     component: DiscussionList
+  },
+  { 
+    path: '/university/:uniName/:courseName', 
+    name: 'CourseDetails', 
+    component: CourseDetails, 
   },
   {
     path: '/:pathMatch(.*)*',

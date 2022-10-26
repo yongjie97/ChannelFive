@@ -10,7 +10,7 @@
     <section class="container overflow-hidden">
         <div class="row mb-5">
             <div class="input-group">
-                <input type="search" v-model="query" class="form-control rounded"
+                <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3"
                     placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
                 <button @click.prevent="submit()" type="button" class="btn btn-warning text-white">Search</button>
             </div>

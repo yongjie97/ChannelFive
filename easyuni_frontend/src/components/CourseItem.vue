@@ -1,5 +1,5 @@
 <template>
-    <router-link :to=url>
+    <router-link :to=url >
         <div class="card mb-2">
             <div class="card-body py-3 px-4">
                 <h5 class="mb-1">{{ courseName }}</h5>
@@ -16,12 +16,7 @@ export default {
     name: 'CourseItem',
     props: {
         courseName: String,
-        schoolName: String
-    },
-    data() {
-        return {
-            url: ''
-        }
+        schoolName: String,
     },
     computed: {
         url() {

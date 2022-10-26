@@ -11,7 +11,7 @@
             <div class="row mb-5 justify-content-center">
                 <div class="col col-xl-10">
                     <div class="input-group">
-                        <input type="search" v-model="query" class="form-control p-2"
+                        <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3"
                             placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
                         <button @click.prevent="submit()" type="button"
                             class="btn btn-warning text-white">Search</button>
@@ -19,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="row d-flex justify-content-center" v-if="uniData.length===0">
+            <div class="row d-flex justify-content-center" v-if="uniData.length === 0 && isLoaded">
                 <div class="col col-xl-10">
                     <h5 style="text-align: center">No course found. Try searching for another course.</h5>
                 </div>
@@ -48,6 +48,7 @@ export default {
         return {
             query: '',
             uniData: [],
+            isLoaded: false,
         }
     },
     mounted() {
@@ -67,6 +68,7 @@ export default {
                                     this.uniData.push(element);
                     });
                 }
+                this.isLoaded = true;
             }).catch((error) => {
                 alert(error.message)
             })
@@ -74,6 +76,7 @@ export default {
     methods: {
         submit: function () {
             this.$router.push("/search/" + this.query)
+            this.isLoaded = false;
             axios({
                 method: 'get',
                 url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=100'
@@ -89,6 +92,7 @@ export default {
                                         this.uniData.push(element);
                         });
                     }
+                    this.isLoaded = true;
                 }).catch((error) => {
                     alert(error.message)
                 })

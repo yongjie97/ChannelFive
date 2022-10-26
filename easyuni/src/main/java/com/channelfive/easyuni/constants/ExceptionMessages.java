@@ -9,6 +9,9 @@ public class ExceptionMessages {
     public static final String UNI_NF_MSG = "University does not exist.";
     public static final String ACC_AE_MSG = "Email have already been used.";
     public static final String ACC_NV_MSG = "Account have not been verified.";
+    public static final String CIGP_NF_MSG = "Course IGP cannot be found.";
+    public static final String CIT_NF_MSG = "Course Intake cannot be found.";
+
 
     public static final String EMAIL_PW_WRONG_MSG = "Email/Password is invalid.";
 

@@ -10,8 +10,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.channelfive.easyuni.entities.Course;
+import com.channelfive.easyuni.entities.CourseIGP;
+import com.channelfive.easyuni.entities.CourseIntake;
 import com.channelfive.easyuni.entities.School;
 import com.channelfive.easyuni.entities.University;
+import com.channelfive.easyuni.services.repositories.CourseIGPRepository;
+import com.channelfive.easyuni.services.repositories.CourseIntakeRepository;
 import com.channelfive.easyuni.services.repositories.CourseRepository;
 import com.channelfive.easyuni.services.repositories.SchoolRepository;
 import com.channelfive.easyuni.services.repositories.UniversityRepository;
@@ -20,13 +24,10 @@ import com.channelfive.easyuni.services.repositories.UniversityRepository;
 public class EasyuniApplication {
 
 	@Autowired
-	private UniversityRepository universityRepository;
+	private CourseIGPRepository courseIGPRepository;
 
 	@Autowired
-	private SchoolRepository schoolRepository;
-
-	@Autowired
-	private CourseRepository courseRepository;
+	private CourseIntakeRepository courseIntakeRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EasyuniApplication.class, args);
@@ -36,7 +37,96 @@ public class EasyuniApplication {
 	InitializingBean sendDatabase() {
 		return () -> {
 
-			if (universityRepository.count() > 0 && 
+			if (courseIGPRepository.count() > 0)
+				return; 
+
+			List<CourseIntake> courseIntakeList = new ArrayList<>();
+			CourseIntake bods_bcs = new CourseIntake();
+			bods_bcs.setName("Bachelor of Computing (Computer Science)");
+			bods_bcs.setIntake(777);
+			bods_bcs.setYear(2021);
+			courseIntakeList.add(bods_bcs);
+
+			CourseIntake bods_bcs2 = new CourseIntake();
+			bods_bcs2.setName("Bachelor of Computing (Computer Science)");
+			bods_bcs2.setIntake(596);
+			bods_bcs2.setYear(2019);
+			courseIntakeList.add(bods_bcs2);
+
+
+			CourseIntake bods_cs = new CourseIntake();
+			bods_cs.setName("Computer Science");
+			bods_cs.setIntake(478);
+			bods_cs.setYear(2021);
+			courseIntakeList.add(bods_cs);
+
+			CourseIntake bods_cs1 = new CourseIntake();
+			bods_cs1.setName("Computer Science");
+			bods_cs1.setIntake(472);
+			bods_cs1.setYear(2020);
+			courseIntakeList.add(bods_cs1);
+
+			CourseIntake bods_cs2 = new CourseIntake();
+			bods_cs2.setName("Computer Science");
+			bods_cs2.setIntake(424);
+			bods_cs2.setYear(2019);
+			courseIntakeList.add(bods_cs2);
+
+			CourseIntake bods_cs3 = new CourseIntake();
+			bods_cs3.setName("Computer Science");
+			bods_cs3.setIntake(347);
+			bods_cs3.setYear(2018);
+			courseIntakeList.add(bods_cs3);
+
+			CourseIntake bods_cs4 = new CourseIntake();
+			bods_cs4.setName("Computer Science");
+			bods_cs4.setIntake(308);
+			bods_cs4.setYear(2017);
+			courseIntakeList.add(bods_cs4);
+
+			CourseIntake bods_cs5 = new CourseIntake();
+			bods_cs5.setName("Computer Science");
+			bods_cs5.setIntake(263);
+			bods_cs5.setYear(2016);
+			courseIntakeList.add(bods_cs5);
+
+			List<CourseIGP> courseIGPList = new ArrayList<>();
+			CourseIGP bods = new CourseIGP();
+			bods.setName("Bachelor of Dental Surgery");
+			bods.setGrades("AAA/A");
+			bods.setRankPoint("85");
+			bods.setGpa(null);
+			bods.setYear(2021);
+			courseIGPList.add(bods);
+
+			CourseIGP bocs = new CourseIGP();
+			bocs.setName("Bachelor of Computing (Computer Science)");
+			bocs.setGrades("AAA/A");
+			bocs.setRankPoint("85");
+			bocs.setGpa("3.86");
+			bocs.setYear(2021);
+			courseIGPList.add(bocs);
+
+			CourseIGP cs = new CourseIGP();
+			cs.setName("Computer Science");
+			cs.setGrades("AAA/B");
+			cs.setRankPoint("83.75");
+			cs.setGpa("3.9");
+			cs.setYear(2021);
+			courseIGPList.add(cs);
+
+			CourseIGP b = new CourseIGP();
+			b.setName("Business");
+			b.setGrades("BBC/B");
+			b.setRankPoint("73.75");
+			b.setGpa("3.64");
+			b.setYear(2021);
+			courseIGPList.add(b); 
+
+			courseIGPRepository.saveAll(courseIGPList);
+			courseIntakeRepository.saveAll(courseIntakeList);
+
+			/*if (universityRepository.count() > 0 && 
 			schoolRepository.count() > 0 &&
 			courseRepository.count() > 0)
 				return;
@@ -226,7 +316,7 @@ public class EasyuniApplication {
 			// Start of Saving Courses
 			courseRepository.saveAll(nus_courses);
 			schoolRepository.saveAll(nus_schools);
-			// End of Saving Courses
+			// End of Saving Courses*/
 
 		};
 	}
