@@ -1,5 +1,5 @@
 <template>
-    <div class="min-vh-100 pt-5" style="background-color: #E0E0E0;">
+    <div class="min-vh-100 pt-5" style="background-color: #F4f7f7;">
         <CourseSelection :title="'Looking for Courses?'" />
     </div>
 </template>

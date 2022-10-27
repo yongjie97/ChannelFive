@@ -1,5 +1,5 @@
 <template>
-    <div class="min-vh-100" style="background-color: #E0E0E0;">
+    <div class="min-vh-100" style="background-color: #F4f7f7;">
         <div class="uni-background mb-5 py-5 img-fluid">
             <div class="container text-center py-5">
                 <h3 class="text-white display-3 py-5 text-capitalize">Search Results</h3>
@@ -14,7 +14,7 @@
                         <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3"
                             placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
                         <button @click.prevent="submit()" type="button"
-                            class="btn btn-warning text-white">Search</button>
+                            class="btn btn-warning btn-block text-white">Search</button>
                     </div>
                 </div>
             </div>

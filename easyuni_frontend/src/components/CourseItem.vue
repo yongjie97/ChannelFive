@@ -1,4 +1,5 @@
 <template>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <router-link :to=url >
         <div class="card mb-2">
             <div class="card-body py-3 px-4">
@@ -45,5 +46,7 @@ a {
 
 .card:hover {
     background-color: #dfdfdf !important;
+    animation: pulse;
+    animation-duration: 1.5s;
 }
 </style>

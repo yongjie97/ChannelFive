@@ -37,8 +37,12 @@ public class EasyuniApplication {
 	InitializingBean sendDatabase() {
 		return () -> {
 
-			if (courseIGPRepository.count() > 0)
+			if (courseIGPRepository.count() > 0 &&
+				courseIntakeRepository.count() > 0)
 				return; 
+
+			courseIGPRepository.deleteAll();
+			courseIntakeRepository.deleteAll();
 
 			List<CourseIntake> courseIntakeList = new ArrayList<>();
 			CourseIntake bods_bcs = new CourseIntake();
@@ -52,7 +56,6 @@ public class EasyuniApplication {
 			bods_bcs2.setIntake(596);
 			bods_bcs2.setYear(2019);
 			courseIntakeList.add(bods_bcs2);
-
 
 			CourseIntake bods_cs = new CourseIntake();
 			bods_cs.setName("Computer Science");
@@ -90,6 +93,42 @@ public class EasyuniApplication {
 			bods_cs5.setYear(2016);
 			courseIntakeList.add(bods_cs5);
 
+			CourseIntake bods_ce = new CourseIntake();
+			bods_ce.setName("Computer Engineering");
+			bods_ce.setIntake(96);
+			bods_ce.setYear(2021);
+			courseIntakeList.add(bods_ce);
+
+			CourseIntake bods_ce1 = new CourseIntake();
+			bods_ce1.setName("Computer Engineering");
+			bods_ce1.setIntake(99);
+			bods_ce1.setYear(2020);
+			courseIntakeList.add(bods_ce1);
+
+			CourseIntake bods_ce2 = new CourseIntake();
+			bods_ce2.setName("Computer Engineering");
+			bods_ce2.setIntake(90);
+			bods_ce2.setYear(2019);
+			courseIntakeList.add(bods_ce2);
+
+			CourseIntake bods_ce3 = new CourseIntake();
+			bods_ce3.setName("Computer Engineering");
+			bods_ce3.setIntake(87);
+			bods_ce3.setYear(2018);
+			courseIntakeList.add(bods_ce3);
+
+			CourseIntake bods_ce4 = new CourseIntake();
+			bods_ce4.setName("Computer Engineering");
+			bods_ce4.setIntake(86);
+			bods_ce4.setYear(2017);
+			courseIntakeList.add(bods_ce4);
+
+			CourseIntake bods_ce5 = new CourseIntake();
+			bods_ce5.setName("Computer Engineering");
+			bods_ce5.setIntake(71);
+			bods_ce5.setYear(2016);
+			courseIntakeList.add(bods_ce5);
+
 			List<CourseIGP> courseIGPList = new ArrayList<>();
 			CourseIGP bods = new CourseIGP();
 			bods.setName("Bachelor of Dental Surgery");
@@ -106,6 +145,14 @@ public class EasyuniApplication {
 			bocs.setGpa("3.86");
 			bocs.setYear(2021);
 			courseIGPList.add(bocs);
+
+			CourseIGP ce = new CourseIGP();
+			ce.setName("Computer Engineering");
+			ce.setGrades("ABC/C");
+			ce.setRankPoint("75");
+			ce.setGpa("3.87");
+			ce.setYear(2021);
+			courseIGPList.add(ce);
 
 			CourseIGP cs = new CourseIGP();
 			cs.setName("Computer Science");

@@ -12,7 +12,7 @@
             <div class="input-group">
                 <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3"
                     placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
-                <button @click.prevent="submit()" type="button" class="btn btn-warning text-white">Search</button>
+                <button @click.prevent="submit()" type="button" class="btn btn-warning btn-block text-white">Search</button>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                     <img class="service card-img" src="../assets/image/nus.png" alt="NUS">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
-                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">NUS</span>
+                            <span class="btn btn-carousel btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">NUS</span>
                             <p class="card-text">National University of Singapore</p>
                         </div>
                     </div>
@@ -38,7 +38,7 @@
                     <img class="card-img" src="../assets/image/ntu.jpeg" alt="NTU">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
-                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">NTU</span>
+                            <span class="btn btn-carousel btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">NTU</span>
                             <p class="card-text">Nanyang Technological University</p>
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     <img class="card-img" src="../assets/image/smu.jpeg" alt="SMU">
                     <div class="service-work-vertical card-img-overlay d-flex align-items-end">
                         <div class="service-work-content text-left text-light">
-                            <span class="btn btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">SMU</span>
+                            <span class="btn btn-carousel btn-outline-light rounded-pill mb-lg-3 px-lg-4 light-300">SMU</span>
                             <p class="card-text">Singapore Management University</p>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ export default {
 </style>
 
 <style scoped>
-.btn:hover {
+.btn-carousel:hover {
     background-color: #fff !important;
 }
 </style>

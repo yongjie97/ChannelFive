@@ -1,5 +1,5 @@
 <template>
-    <section class="min-vh-100" style="background-color: #E0E0E0;">
+    <section class="min-vh-100" style="background-color: #F4f7f7;">
             <div class="container py-2 h-100">
             <div class="row d-flex justify-content-center align-items-center vh-100">
                 <div class="col col-xl-10">

@@ -3,17 +3,17 @@
     <div class="container py-5">
       <div class="row d-flex justify-content-center justify-content-start-s align-items-center">
         <div class="col col-xl-10">
-          <div class="row my-5 justify-content-between justify-content-between-l">
+          <div class="row my-5 mb-3 justify-content-between justify-content-between-l">
             <div class="col col-auto mb-3">
-              <h2>{{ courseData.degree }}</h2>
+              <h3>{{ courseData.degree }}</h3>
               <p class="mb-1 text-muted">Grades: <strong>{{ grades }}</strong></p>
               <p class="mb-1 text-muted">Rank Point: <strong>{{ rp }}</strong></p>
               <p class="mb-1 text-muted">GPA: <strong>{{ gpa }}</strong></p>
             </div>
             <div class="col col-12 col-lg-auto">
-              <h4 class="text-muted text-truncate">{{ courseData.university }}</h4>
+              <h4 class="text-muted">{{ courseData.university }}</h4>
               <div class="d-flex flex-lg-row-reverse">
-                <p class="text-muted text-truncate">{{ courseData.school }}</p>
+                <p class="text-muted">{{ courseData.school }}</p>
               </div>
             </div>
           </div>
@@ -110,7 +110,6 @@ export default {
           this.employment.datasets[0].data = this.employmentRate
         }
       }).catch((error) => {
-        alert(error.message)
       })
 
     axios({
@@ -132,7 +131,6 @@ export default {
           }
         }
       }).catch((error) => {
-        alert(error.message)
       })
 
     axios({
@@ -150,9 +148,12 @@ export default {
           }
         }
       }).catch((error) => {
-        alert(error.message)
       })
 
   },
 }
 </script>
+
+<style scoped>
+
+</style>
