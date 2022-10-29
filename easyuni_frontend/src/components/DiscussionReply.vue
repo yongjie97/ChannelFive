@@ -48,7 +48,7 @@
 
   .bg-custom {
     border: 1px;
-    background-color: #f8f8f8;
+    background-color: #e9e7e7;
   }
 
   </style>

@@ -16,7 +16,7 @@
                                     v-if="failMessage">{{ failMessage }}</p>
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="title">Discussion Title</label>
-                                    <input type="text" id="title" name="title" v-model="title"
+                                    <input type="text" id="title" name="title" v-model="title" autofocus
                                         class="form-control form-control-md"
                                         :class="{ 'border-danger': v$.title.$error }" />
                                     <div class="form-label text-danger" v-if="v$.title.$error">Please enter a title

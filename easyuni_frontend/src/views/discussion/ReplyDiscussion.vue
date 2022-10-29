@@ -15,7 +15,7 @@
                                 <p style="white-space: pre-line" class="fw-normal mb-3 alert alert-danger"
                                     v-if="failMessage">{{ failMessage }}</p>
                                 <div class="form-outline mb-4">
-                                    <VueQuill v-model:content="message" />
+                                    <VueQuill v-model:content="message" @ready="onReady" />
                                     <div class="form-label text-danger" v-if="v$.message.$error">Please enter something
                                     </div>
                                 </div>
@@ -61,7 +61,7 @@ export default {
     },
     mounted() {
         if (!this.$cookies.get('token')) {
-            this.$router.push({ name: 'Login', query: { ref: 'replydiscussion_' +  this.$route.params.id} })
+            this.$router.push({ name: 'Login', query: { ref: 'replydiscussion', discussionId: this.$route.params.id } })
         }
         axios({
             method: 'get',
@@ -101,7 +101,10 @@ export default {
                     this.successMessage = null
                 })
             }
-        }
+        },
+        onReady(editor) {
+            editor.focus();
+        },
     }
 }
 
