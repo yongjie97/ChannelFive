@@ -1,13 +1,18 @@
 package com.channelfive.easyuni;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 
 import com.channelfive.easyuni.entities.Course;
 import com.channelfive.easyuni.entities.CourseIGP;
@@ -38,11 +43,27 @@ public class EasyuniApplication {
 		return () -> {
 
 			if (courseIGPRepository.count() > 0 &&
-				courseIntakeRepository.count() > 0)
+			courseIntakeRepository.count() > 0)
 				return; 
 
 			courseIGPRepository.deleteAll();
 			courseIntakeRepository.deleteAll();
+
+			List<CourseIGP> courseIGPList = new ArrayList<>();
+			File file = new ClassPathResource("static/NTU_IGP_2022.csv").getFile();
+			FileReader fileReader = new FileReader(file);
+			BufferedReader br = new BufferedReader(fileReader);
+			String line = "";
+			while ((line = br.readLine()) != null) {
+				String[] igp = line.split(",");
+				CourseIGP newIGP = new CourseIGP();
+				newIGP.setName(igp[0].replace(".", ",").trim());
+				newIGP.setGrades(igp[1].trim());
+				newIGP.setRankPoint(igp[2].trim()); 
+				newIGP.setGpa(igp[3].trim());
+				newIGP.setYear(2022);
+				courseIGPList.add(newIGP);
+			}
 
 			List<CourseIntake> courseIntakeList = new ArrayList<>();
 			CourseIntake bods_bcs = new CourseIntake();
@@ -129,7 +150,7 @@ public class EasyuniApplication {
 			bods_ce5.setYear(2016);
 			courseIntakeList.add(bods_ce5);
 
-			List<CourseIGP> courseIGPList = new ArrayList<>();
+			//List<CourseIGP> courseIGPList = new ArrayList<>();
 			CourseIGP bods = new CourseIGP();
 			bods.setName("Bachelor of Dental Surgery");
 			bods.setGrades("AAA/A");
@@ -146,7 +167,7 @@ public class EasyuniApplication {
 			bocs.setYear(2021);
 			courseIGPList.add(bocs);
 
-			CourseIGP ce = new CourseIGP();
+			/*CourseIGP ce = new CourseIGP();
 			ce.setName("Computer Engineering");
 			ce.setGrades("ABC/C");
 			ce.setRankPoint("75");
@@ -168,7 +189,7 @@ public class EasyuniApplication {
 			b.setRankPoint("73.75");
 			b.setGpa("3.64");
 			b.setYear(2021);
-			courseIGPList.add(b); 
+			courseIGPList.add(b);*/
 
 			courseIGPRepository.saveAll(courseIGPList);
 			courseIntakeRepository.saveAll(courseIntakeList);

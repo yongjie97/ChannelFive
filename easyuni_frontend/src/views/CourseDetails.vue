@@ -55,25 +55,15 @@ export default {
       hasIntake: false,
       intake: {
         labels: [],
-        datasets: [{
-          data: [],
-        }],
+        datasets: [],
       },
       salary: {
         labels: [],
-        datasets: [
-          {
-            data: [],
-          }
-        ],
+        datasets: [],
       },
       employment: {
         labels: [],
-        datasets: [
-          {
-            data: [],
-          }
-        ],
+        datasets: [],
       },
     }
   },
@@ -105,9 +95,9 @@ export default {
               }
           });
           this.salary.labels = this.year
-          this.salary.datasets[0].data = this.medianSalary
+          this.salary.datasets.push({data: this.medianSalary})
           this.employment.labels = this.year
-          this.employment.datasets[0].data = this.employmentRate
+          this.employment.datasets.push({data: this.employmentRate})
         }
       }).catch((error) => {
       })
@@ -140,10 +130,12 @@ export default {
       .then(response => {
         if (response != null) {
           if (response.data.success) {
+            var intakeData = []
             response.data.data.forEach(element => {
               this.intake.labels.push(element.year)
-              this.intake.datasets[0].data.push(element.intake);
+              intakeData.push(element.intake)
             })
+            this.intake.datasets.push({data: intakeData})
             this.hasIntake = true
           }
         }
