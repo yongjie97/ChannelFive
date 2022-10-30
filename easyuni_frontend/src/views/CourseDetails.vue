@@ -81,11 +81,11 @@ export default {
     this.uniName = this.$route.params.uniName.replaceAll('-', ' ');
     axios({
       method: 'get',
-      url: 'https://data.gov.sg/api/3/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&limit=847'
+      url: 'http://localhost:8080/course/ges'
     })
       .then(response => {
         if (response != null) {
-          response.data.result.records.forEach(element => {
+          response.data.data.result.records.forEach(element => {
             if (element.university.toUpperCase() === this.$route.params.uniName.replaceAll('-', ' ').toUpperCase())
               if (element.degree.toUpperCase() === this.$route.params.courseName.replaceAll('-', ' ').toUpperCase()) {
                 if (element.year == "2019") {
@@ -95,7 +95,7 @@ export default {
 
                 if (element.gross_monthly_median === "na")
                   this.medianSalary.push(0)
-                else
+                else 
                   this.medianSalary.push(parseInt(element.gross_monthly_median, 10))
 
                 if (element.employment_rate_overall === "na")
