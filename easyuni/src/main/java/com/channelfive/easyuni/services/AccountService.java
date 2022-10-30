@@ -128,7 +128,7 @@ public class AccountService {
 
     private void sendResetPasswordEmailHtml(String email, String verificationCode) {
         String message = MessageFormat.format("{0}/{1}/{2}", 
-        ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(), 
+        ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString().replace("8080", "8081"), 
         "password/recovery", verificationCode);
         try {
             File htmlPath = new ClassPathResource("static/email/change_password.html").getFile();
@@ -141,7 +141,7 @@ public class AccountService {
 
     private void sendVerficationEmailHtml(String email, String verificationCode) {
         String message = MessageFormat.format("{0}/{1}/{2}/{3}", 
-        ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString(), 
+        ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString().replace("8080", "8081"), 
         "register/verify", email, verificationCode);
         try {
             File htmlPath = new ClassPathResource("static/email/email.html").getFile();
