@@ -2,6 +2,7 @@ package com.channelfive.easyuni.controllers;
 
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import com.channelfive.easyuni.entities.CourseIGP;
 import com.channelfive.easyuni.entities.CourseIntake;
 import com.channelfive.easyuni.exceptions.CourseIGPNotFoundException;
 import com.channelfive.easyuni.exceptions.CourseIntakeNotFoundException;
+import com.channelfive.easyuni.exceptions.GESNotFoundException;
 import com.channelfive.easyuni.payload.JSONResponseBuilder;
 import com.channelfive.easyuni.services.CourseDetailsService;
 
@@ -23,6 +25,16 @@ public class CourseDetailsController {
 
     @Autowired
     CourseDetailsService courseDetailsService;
+
+    @GetMapping("/course/ges") 
+    public ResponseEntity<?> getGES() {
+        try { 
+            JSONObject ges = courseDetailsService.getGES();
+            return ResponseEntity.ok().body(JSONResponseBuilder.build(true, null, ges.toMap()));
+        } catch (GESNotFoundException e) {
+            return ResponseEntity.ok().body(JSONResponseBuilder.build(false, e.getMessage(), null));
+        }
+    }
 
     @GetMapping("/courseIGP/{courseName}")
     public ResponseEntity<?> getCourseIGP(@PathVariable String courseName) {

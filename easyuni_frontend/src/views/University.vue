@@ -11,7 +11,7 @@
             <div class="row d-flex justify-content-center">
                 <div class="col col-xl-10 mb-5">
                     <div class="input-group">
-                        <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3" 
+                        <input @keyup.enter="submit()" type="search" v-model="query" class="form-control p-3"
                             placeholder="e.g. Computer Science" aria-label="Search" aria-describedby="search-addon" />
                         <button @click.prevent="submit()" type="button"
                             class="btn btn-warning btn-block text-white">Search</button>
@@ -44,16 +44,17 @@ export default {
         this.uniName = this.$route.params.uniName.replaceAll('-', ' ');
         axios({
             method: 'get',
-            url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&limit=847'
+            url: 'http://localhost:8080/course/ges'
         })
             .then(response => {
                 if (response != null) {
-                    response.data.result.records.forEach(element => {
+                    console.log(response)
+                    response.data.data.result.records.forEach(element => {
                         if (element.year === "2019")
-                        if (element.university.toUpperCase() === this.$route.params.uniName.replaceAll('-', ' ').toUpperCase())
-                            if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
-                                && !element.degree.includes("Cum Laude"))
-                                this.uniData.push(element);
+                            if (element.university.toUpperCase() === this.$route.params.uniName.replaceAll('-', ' ').toUpperCase())
+                                if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
+                                    && !element.degree.includes("Cum Laude"))
+                                    this.uniData.push(element);
                     });
                 }
             }).catch((error) => {
@@ -65,12 +66,12 @@ export default {
             this.$router.push("/search/" + this.query)
             axios({
                 method: 'get',
-                url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=100'
+                url: 'http://localhost:8080/course/ges'
             })
                 .then(response => {
                     if (response != null) {
                         this.uniData = [];
-                        response.data.result.records.forEach(element => {
+                        response.data.data.result.records.forEach(element => {
                             if (element.university !== "Singapore Institute of Technology")
                                 if (element.degree.toUpperCase().includes(this.query.toUpperCase()))
                                     if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")

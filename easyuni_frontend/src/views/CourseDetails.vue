@@ -55,25 +55,15 @@ export default {
       hasIntake: false,
       intake: {
         labels: [],
-        datasets: [{
-          data: [],
-        }],
+        datasets: [],
       },
       salary: {
         labels: [],
-        datasets: [
-          {
-            data: [],
-          }
-        ],
+        datasets: [],
       },
       employment: {
         labels: [],
-        datasets: [
-          {
-            data: [],
-          }
-        ],
+        datasets: [],
       },
     }
   },
@@ -81,11 +71,11 @@ export default {
     this.uniName = this.$route.params.uniName.replaceAll('-', ' ');
     axios({
       method: 'get',
-      url: 'https://data.gov.sg/api/3/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&limit=847'
+      url: 'http://localhost:8080/course/ges'
     })
       .then(response => {
         if (response != null) {
-          response.data.result.records.forEach(element => {
+          response.data.data.result.records.forEach(element => {
             if (element.university.toUpperCase() === this.$route.params.uniName.replaceAll('-', ' ').toUpperCase())
               if (element.degree.toUpperCase() === this.$route.params.courseName.replaceAll('-', ' ').toUpperCase()) {
                 if (element.year == "2019") {
@@ -95,7 +85,7 @@ export default {
 
                 if (element.gross_monthly_median === "na")
                   this.medianSalary.push(0)
-                else
+                else 
                   this.medianSalary.push(parseInt(element.gross_monthly_median, 10))
 
                 if (element.employment_rate_overall === "na")
@@ -105,9 +95,9 @@ export default {
               }
           });
           this.salary.labels = this.year
-          this.salary.datasets[0].data = this.medianSalary
+          this.salary.datasets.push({data: this.medianSalary})
           this.employment.labels = this.year
-          this.employment.datasets[0].data = this.employmentRate
+          this.employment.datasets.push({data: this.employmentRate})
         }
       }).catch((error) => {
       })
@@ -140,10 +130,12 @@ export default {
       .then(response => {
         if (response != null) {
           if (response.data.success) {
+            var intakeData = []
             response.data.data.forEach(element => {
               this.intake.labels.push(element.year)
-              this.intake.datasets[0].data.push(element.intake);
+              intakeData.push(element.intake)
             })
+            this.intake.datasets.push({data: intakeData})
             this.hasIntake = true
           }
         }

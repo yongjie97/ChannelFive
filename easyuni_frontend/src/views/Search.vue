@@ -56,15 +56,16 @@ export default {
             this.query = this.$route.params.query
         axios({
             method: 'get',
-            url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=100'
+            url: 'http://localhost:8080/course/ges'
         })
             .then(response => {
                 if (response != null) {
-                    response.data.result.records.forEach(element => {
+                    response.data.data.result.records.forEach(element => {
                         if (element.university !== "Singapore Institute of Technology")
                             if (element.degree.toUpperCase().includes(this.$route.params.query.toUpperCase()))
                                 if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
                                     && !element.degree.includes("Cum Laude"))
+                                    if(element.year === "2019")
                                     this.uniData.push(element);
                     });
                 }
@@ -79,17 +80,18 @@ export default {
             this.isLoaded = false;
             axios({
                 method: 'get',
-                url: 'https://data.gov.sg/api/action/datastore_search?resource_id=9326ca53-9153-4a9c-b93f-8ae032637b70&q=2019&limit=100'
+                url: 'http://localhost:8080/course/ges'
             })
                 .then(response => {
                     if (response != null) {
                         this.uniData = [];
-                        response.data.result.records.forEach(element => {
+                        response.data.data.result.records.forEach(element => {
                             if (element.university !== "Singapore Institute of Technology")
-                                if (element.degree.toUpperCase().includes(this.query.toUpperCase()))
-                                    if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
-                                        && !element.degree.includes("Cum Laude"))
-                                        this.uniData.push(element);
+                                if (!element.degree.includes("*") && !element.degree.includes("#") && !element.degree.includes("^")
+                                    && !element.degree.includes("Cum Laude"))
+                                    if (element.degree.toUpperCase().includes(this.query.toUpperCase()))
+                                        if(element.year === "2019")
+                                            this.uniData.push(element);
                         });
                     }
                     this.isLoaded = true;
