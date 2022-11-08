@@ -1,6 +1,6 @@
 <template>
     <div class="py-3">
-        <h3>GES Employement Rate</h3>
+        <h3>GES Employment Rate</h3>
         <small class="text-muted text-small">Data provided by <a href="https://data.gov.sg/" target="_blank">Data.gov.sg</a></small>
         <BarChart :chartData="chartData" :chartOptions="chartOptions" />
     </div>
